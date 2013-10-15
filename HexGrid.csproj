@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Commands\ExampleCommand.cs" />
+    <Compile Include="Helpers\Gradient.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -112,7 +113,15 @@
     <Compile Include="Helpers\Color\RGB.cs" />
     <Compile Include="Helpers\Color\YUV.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="ViewModels\Tile.cs" />
+    <Compile Include="Models\Hexagons\ClosedHexagon.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\Directions.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\Hexagons\OpenHexagon.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Hexagons\Hexagon.cs" />
+    <Compile Include="Models\Hexagons\PlayerHexagon.cs" />
+    <Compile Include="ViewModels\Cell.cs" />
     <Compile Include="Views\GridWindow.xaml.cs">
       <DependentUpon>GridWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

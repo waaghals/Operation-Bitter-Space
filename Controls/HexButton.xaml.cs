@@ -20,15 +20,9 @@ namespace Hexxagon.Controls
     /// </summary>
     public partial class HexButton : ToggleButton 
     {
-        public string Player { get; set; }
         public HexButton()
         {
             InitializeComponent();
-
-            Random generator = new Random();
-            string[] names = { "purple", "yellow"};
-            Player = names[generator.Next(names.Length)];
-            
         }
     }
 }

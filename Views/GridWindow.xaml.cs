@@ -1,4 +1,5 @@
 ﻿using Hexxagon.Controls;
+using Hexxagon.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,28 @@ namespace Hexxagon
         {
             InitializeComponent();
 
-            short hue = 1;
+            PlayerHexagon playerHex = new PlayerHexagon()
+            {
+                Owner = new Player()
+                {
+                    Name = "Patrick",
+                    Hue = 150                    
+                }
+            };
+            PlayerHexagon opponentHex = new PlayerHexagon()
+            {
+                Owner = new Player()
+                {
+                    Name = "Yorick",
+                    Hue = 200                    
+                }
+            };
+            OpenHexagon openHex = new OpenHexagon();
+            ClosedHexagon closedHex = new ClosedHexagon();
+            Hexagon[] hexes = new Hexagon[] {playerHex, opponentHex, openHex, closedHex};
+            Random ran = new Random();
+
+            //short hue = 1;
             HexButton hex;
             for (int i = 0; i < 10; i++)
             {
@@ -34,8 +56,11 @@ namespace Hexxagon
                     grid.Children.Add(hex);
                     HexagonGrid.SetRow(hex, i);
                     HexagonGrid.SetColumn(hex, j);
-                    hex.DataContext = new Tile(hue);
-                    hue += 3;
+
+
+                    Hexagon hexCell = hexes[ran.Next(hexes.Length)];
+                    hex.DataContext = new Cell(hexCell);
+                    //hue += 3;
                 }
             }
         }
