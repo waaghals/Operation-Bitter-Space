@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{60FF4C73-B3D4-4AF8-A3E7-3C0F8DF7D431}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hexxagon</RootNamespace>
     <AssemblyName>Hexxagon</AssemblyName>
@@ -95,7 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Commands\ExampleCommand.cs" />
+    <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Helpers\Gradient.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

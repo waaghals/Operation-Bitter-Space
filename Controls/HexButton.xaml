@@ -42,4 +42,7 @@
             </Setter>
         </Style>
     </ToggleButton.Style>
+    <ToggleButton.Command>
+        <Binding Path="ClickCommand"/>
+    </ToggleButton.Command>
 </ToggleButton>
