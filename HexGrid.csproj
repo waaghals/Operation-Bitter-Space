@@ -8,7 +8,7 @@
     <ProjectGuid>{60FF4C73-B3D4-4AF8-A3E7-3C0F8DF7D431}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HexagonGridTest</RootNamespace>
+    <RootNamespace>Hexxagon</RootNamespace>
     <AssemblyName>HexagonGridTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -67,21 +67,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HexButton.xaml">
+    <Page Include="Controls\HexButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="Views\GridWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Commands\ExampleCommand.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HexButton.xaml.cs">
+    <Compile Include="Controls\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Color\CIELab.cs" />
@@ -92,14 +93,15 @@
     <Compile Include="Helpers\Color\HSL.cs" />
     <Compile Include="Helpers\Color\RGB.cs" />
     <Compile Include="Helpers\Color\YUV.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="ViewModels\Tile.cs" />
+    <Compile Include="Views\GridWindow.xaml.cs">
+      <DependentUpon>GridWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HexagonGrid.cs" />
+    <Compile Include="Controls\HexagonGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,12 +126,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

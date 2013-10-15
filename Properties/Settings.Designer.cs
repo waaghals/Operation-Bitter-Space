@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HexagonGridTest.Properties {
+namespace Hexxagon.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

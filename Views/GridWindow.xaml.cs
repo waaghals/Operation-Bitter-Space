@@ -1,4 +1,4 @@
-﻿using Controls;
+﻿using Hexxagon.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HexagonGridTest
+namespace Hexxagon
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class GridWindow : Window
     {
-        public Window1()
+        public GridWindow()
         {
             InitializeComponent();
 
