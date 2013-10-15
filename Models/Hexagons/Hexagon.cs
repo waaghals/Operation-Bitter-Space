@@ -1,4 +1,5 @@
-﻿using Hexxagon.Models;
+﻿using Hexxagon.Common;
+using Hexxagon.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Windows;
 
 namespace Hexxagon.Models
 {
-    public abstract class Hexagon
+    public abstract class Hexagon : BaseNotifier
     {
         public Point Location { get; set; }
         public Dictionary<Direction, Hexagon> Neighbours { get; set; }

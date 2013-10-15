@@ -1,13 +1,28 @@
-﻿using System;
+﻿using Hexxagon.Common;
+using Hexxagon.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Hexxagon.Models
 {
-    public class Player : BaseModel
+    public class Player : BaseNotifier
     {
-        public string Name { get; set; }
+        #region Properties
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                SetProperty(ref name, value);
+            }
+        }
+
         private short hue;
         public short Hue
         {
@@ -20,9 +35,9 @@ namespace Hexxagon.Models
                 if (value > 349 || value < 0)
                     throw new ArgumentException("Player.Hue needs to be between 0 and 349");
 
-                hue = value;
-                OnPropertyChanged("hue");
+                SetProperty(ref hue, value);
             }
         }
+        #endregion
     }
 }

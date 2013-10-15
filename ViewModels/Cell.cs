@@ -1,8 +1,10 @@
 ﻿using Hexxagon.Commands;
-using Hexxagon.Helpers;
 using Hexxagon.Models;
+using Hexxagon.Helpers;
+using Hexxagon.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,29 +13,78 @@ using System.Windows.Media;
 
 namespace Hexxagon
 {
-    public class Cell
+    public class Cell : BaseViewModel
     {
+        #region Properties
         public ICommand ClickCommand { get; set; }
-        public Hexagon Hex { get; set; }
-        public Brush Gradient { get; set; }
+        public ICommand SecondClickCommand { get; set; }
+
+        private Hexagon hex;
+        public Hexagon Hex
+        {
+            get
+            {
+                return hex;
+            }
+            set
+            {
+                SetProperty(ref hex, value);
+            }
+        }
+
+        private Brush gradient;
+        public Brush Gradient 
+        { 
+            get 
+            { 
+                return gradient; 
+            } 
+            set
+            {
+                SetProperty(ref gradient, value); 
+            } 
+        }
+
+        #endregion
 
         public Cell(Hexagon h)
         {
             Hex = h;
             ClickCommand = new ClickCommand(this);
+            Gradient = Colorize();
 
+
+            if (Hex.IsOwned())
+            {
+                PlayerHexagon pHex = (PlayerHexagon)Hex;
+                SubscribeTo(pHex.Owner);
+            }
+        }
+
+        private Brush Colorize()
+        {
             if (Hex.Available())
             {
-                Gradient = CellGradient.FromHue(0, 0.0);
+               return CellGradient.FromHue(0, 0.0);
             }
             else if (Hex.IsOwned())
             {
                 PlayerHexagon playerHex = (PlayerHexagon)Hex;
-                Gradient = CellGradient.FromHue(playerHex.Owner.Hue, 0.7);
+               return CellGradient.FromHue(playerHex.Owner.Hue, 0.7);
             }
-            else
+            return CellGradient.FromHue(0, 0.15);
+        }
+
+        protected override void ChangeHandler(object sender, PropertyChangedEventArgs e)
+        {
+            //base.ChangeHandler(sender, e);
+
+            //Player hue updated, redraw the Gradient
+            if (e.PropertyName == "Hue")
             {
-                Gradient = CellGradient.FromHue(0, 0.15);
+                //Updating the Colors directly wil result in modifing the UI from a non-UI thread, 
+                //which can't be done in WPF
+                Application.Current.Dispatcher.Invoke(new Action(() => Gradient = Colorize()));
             }
         }
     }

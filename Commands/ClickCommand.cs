@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hexxagon.Models;
+using System;
 using System.Windows.Input;
 namespace Hexxagon.Commands
 {
@@ -18,7 +19,7 @@ namespace Hexxagon.Commands
         }
 
         public void Execute(object parameter) {
-            //Doe iets
+           
         }
     }
 }
