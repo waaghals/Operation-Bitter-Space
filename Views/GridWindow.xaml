@@ -4,7 +4,16 @@
     xmlns:local="clr-namespace:Hexxagon"
     xmlns:controls="clr-namespace:Hexxagon.Controls"
     Title="GridTest" SizeToContent="WidthAndHeight">
-    <controls:HexagonGrid x:Name="grid" Rows="10" Columns="10" HexagonSideLength="40">
-
-    </controls:HexagonGrid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Bestand">
+                <MenuItem Header="_Import..."/>
+                <MenuItem Header="_Afsluiten"/>
+                <MenuItem Header="_Opslaan"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel>
+            <controls:HexagonGrid x:Name="grid" Rows="10" Columns="10" HexagonSideLength="40" />
+        </StackPanel>
+    </DockPanel>    
 </Window>
