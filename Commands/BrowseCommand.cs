@@ -7,13 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 namespace Hexxagon.Commands
 {
-
     internal class BrowseCommand : ICommand
     {
         public MainViewModel ViewModel { get; set; }
-
-
-
 
         public BrowseCommand(MainViewModel vm)
         {
