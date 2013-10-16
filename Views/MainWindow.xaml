@@ -7,13 +7,13 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Bestand">
-                <MenuItem Header="_Import..."/>
-                <MenuItem Header="_Afsluiten"/>
-                <MenuItem Header="_Opslaan"/>
+                <MenuItem Header="_Spel Openen..." Command="{Binding BrowseCommand}" />
+                <MenuItem Header="_Afsluiten" Command="{Binding CloseCommand}" />
+                <MenuItem Header="_Opslaan" Command="{Binding SaveCommand}" />
             </MenuItem>
         </Menu>
         <StackPanel>
-            <controls:HexagonGrid x:Name="grid" Rows="10" Columns="10" HexagonSideLength="40" />
+            <ItemsControl ItemsSource="{Binding Path=Content}"/>
         </StackPanel>
     </DockPanel>    
 </Window>

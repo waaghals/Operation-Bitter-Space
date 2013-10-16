@@ -1,5 +1,6 @@
 ﻿using Hexxagon.Controls;
 using Hexxagon.Models;
+using Hexxagon.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,8 @@ namespace Hexxagon
         {
             InitializeComponent();
 
-            AddTestGridData();
+            DataContext = new MainViewModel();
+            //AddTestGridData();
             
         }
 
@@ -63,7 +65,7 @@ namespace Hexxagon
                 for (int j = 0; j < 10; j++)
                 {
                     hex = new HexButton();
-                    grid.Children.Add(hex);
+                    //grid.Children.Add(hex);
                     HexagonGrid.SetRow(hex, i);
                     HexagonGrid.SetColumn(hex, j);
 
@@ -80,14 +82,14 @@ namespace Hexxagon
         {
             Timer aTimer = new Timer();
             aTimer.Elapsed += new ElapsedEventHandler(UpdateColor);
-            aTimer.Interval = 100;
+            aTimer.Interval = 60/24;
             aTimer.Enabled = true;
         }
 
         // Specify what you want to happen when the Elapsed event is raised.
         private void UpdateColor(object source, ElapsedEventArgs e)
         {
-            hue += 10;
+            hue += 1;
             playerHex.Owner.Hue = (short)(hue % 349);
         }
     }

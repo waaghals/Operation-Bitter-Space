@@ -88,24 +88,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Common\Controls\HexButton.xaml">
+    <Page Include="Views\Controls\HexButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\GridWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Commands\ClickCommand.cs" />
+    <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Commands\BrowseCommand.cs" />
     <Compile Include="Common\BaseNotifier.cs" />
     <Compile Include="Common\Helpers\Gradient.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\Controls\HexButton.xaml.cs">
+    <Compile Include="Views\Controls\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Helpers\Color\CIELab.cs" />
@@ -126,13 +128,15 @@
     <Compile Include="Models\Hexagons\PlayerHexagon.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Cell.cs" />
-    <Compile Include="Views\GridWindow.xaml.cs">
-      <DependentUpon>GridWindow.xaml</DependentUpon>
+    <Compile Include="ViewModels\HexGridViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Controls\HexagonGrid.cs" />
+    <Compile Include="Views\Controls\HexagonGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
