@@ -1,5 +1,6 @@
 ﻿using Hexxagon.Commands;
 using Hexxagon.Controls;
+using Hexxagon.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Hexxagon.ViewModels
 {
@@ -15,12 +17,13 @@ namespace Hexxagon.ViewModels
         public ICommand BrowseCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand TestCommand { get; set; }
 
-        public ObservableCollection<FrameworkElement> Content { get; private set; }
+        public GameViewModel ViewModel { get; private set; }
 
         public MainViewModel()
         {
-            Content = new ObservableCollection<FrameworkElement>();
+             ViewModel = new GameViewModel();
             InitCommands();
         }
 
@@ -28,6 +31,7 @@ namespace Hexxagon.ViewModels
         {
             CloseCommand = new CloseCommand();
             BrowseCommand = new BrowseCommand(this);
+            TestCommand = new TestCommand(ViewModel);
         }
     }
 }

@@ -10,10 +10,33 @@ namespace Hexxagon.Models
 {
     public abstract class Hexagon : BaseNotifier
     {
-        public Point Location { get; set; }
-        public Dictionary<Direction, Hexagon> Neighbours { get; set; }
+        public Dictionary<Neighbour, Hexagon> Neighbours { get; set; }
 
         public abstract bool Available();
         public abstract bool IsOwned();
+
+        //These methodes have been added so that code foot print stays readable
+        public bool Has(Neighbour n)
+        {
+            return Neighbours.ContainsKey(n);
+        }
+
+        public Hexagon Get(Neighbour n)
+        {
+            if (Has(n))
+            {
+                return Neighbours[n];
+            }
+            return null;
+        }
+
+        public void Set(Neighbour n, Hexagon h)
+        {
+            if (Has(n))
+            {
+                throw new ArgumentException("Hexagon already contains a Neighbour in location: " + n);
+            }
+            Neighbours.Add(n, h);
+        }
     }
 }

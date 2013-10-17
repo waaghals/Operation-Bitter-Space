@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Hexxagon.Views.Board"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:Hexxagon.Controls"
+             xmlns:Common="clr-namespace:Hexxagon.Common"
+             xmlns:Debug="clr-namespace:DebugDataBindings"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Common:PointToXConverter x:Key="ConverterX" />
+        <Common:PointToYConverter x:Key="ConverterY" />
+        <Debug:DebugConverter x:Key="BindingDebug" />
+    </UserControl.Resources>
+    <StackPanel>
+        <ItemsControl ItemsSource="{Binding Map}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!--<Button Content="{Binding Converter={StaticResource BindingDebug}}" />-->
+                    <Controls:HexButton DataContext="{Binding Value}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="{x:Type FrameworkElement}">
+                    <Setter Property="Grid.Row" Value="{Binding Key, Converter={StaticResource ConverterY}}"/>
+                    <Setter Property="Grid.Column" Value="{Binding Key, Converter={StaticResource ConverterX}}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            
+        </ItemsControl>
+        
+        <ItemsControl ItemsSource="{Binding Scores}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="{Binding Path=Points}" Fill="{Binding Path=Player.Hue}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+    </StackPanel>
+</UserControl>

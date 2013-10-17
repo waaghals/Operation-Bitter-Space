@@ -71,7 +71,7 @@ namespace Hexxagon
 
 
                     Hexagon hexCell = hexes[ran.Next(hexes.Length)];
-                    hex.DataContext = new Cell(hexCell);
+                    hex.DataContext = new CellViewModel(hexCell);
                     //hue += 3;
                 }
             }

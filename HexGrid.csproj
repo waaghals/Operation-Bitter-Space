@@ -88,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Board.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\HexButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,11 +105,20 @@
     <Compile Include="Commands\ClickCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\BrowseCommand.cs" />
+    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Common\BaseNotifier.cs" />
+    <Compile Include="Common\BindingDebugger.cs" />
     <Compile Include="Common\Helpers\Gradient.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\PointConverter.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Score.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
+    <Compile Include="Views\Board.xaml.cs">
+      <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\HexButton.xaml.cs">
       <DependentUpon>HexButton.xaml</DependentUpon>
@@ -120,14 +133,14 @@
     <Compile Include="Common\Helpers\Color\YUV.cs" />
     <Compile Include="Models\Hexagons\ClosedHexagon.cs" />
     <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Directions.cs" />
+    <Compile Include="Models\Neighbours.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Hexagons\OpenHexagon.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Hexagons\Hexagon.cs" />
     <Compile Include="Models\Hexagons\PlayerHexagon.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Cell.cs" />
+    <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -154,7 +167,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Misc\app.config" />
     <None Include="Misc\Icon\icon.pdn" />
     <None Include="Properties\Settings.settings">

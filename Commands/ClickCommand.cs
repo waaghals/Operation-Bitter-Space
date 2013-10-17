@@ -1,4 +1,5 @@
 ﻿using Hexxagon.Models;
+using Hexxagon.ViewModels;
 using System;
 using System.Windows.Input;
 namespace Hexxagon.Commands
@@ -6,9 +7,9 @@ namespace Hexxagon.Commands
 
     internal class ClickCommand : ICommand
     {
-        private Cell cell;
+        private CellViewModel cell;
 
-        public ClickCommand(Cell c) {
+        public ClickCommand(CellViewModel c) {
             cell = c;
         }
 

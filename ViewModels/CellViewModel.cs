@@ -11,9 +11,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Hexxagon
+namespace Hexxagon.ViewModels
 {
-    public class Cell : BaseViewModel
+    public class CellViewModel : BaseViewModel
     {
         #region Properties
         public ICommand ClickCommand { get; set; }
@@ -47,7 +47,7 @@ namespace Hexxagon
 
         #endregion
 
-        public Cell(Hexagon h)
+        public CellViewModel(Hexagon h)
         {
             Hex = h;
             ClickCommand = new ClickCommand(this);
@@ -65,12 +65,12 @@ namespace Hexxagon
         {
             if (Hex.Available())
             {
-               return CellGradient.FromHue(0, 0.0);
+                return CellGradient.FromHue(0, 0.0);
             }
             else if (Hex.IsOwned())
             {
                 PlayerHexagon playerHex = (PlayerHexagon)Hex;
-               return CellGradient.FromHue(playerHex.Owner.Hue, 0.7);
+                return CellGradient.FromHue(playerHex.Owner.Hue, 0.7);
             }
             return CellGradient.FromHue(0, 0.15);
         }
