@@ -18,19 +18,18 @@ namespace Hexxagon.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand TestCommand { get; set; }
-
         public GameViewModel ViewModel { get; private set; }
 
         public MainViewModel()
         {
-             ViewModel = new GameViewModel();
+            ViewModel = new GameViewModel();
             InitCommands();
         }
 
         private void InitCommands()
         {
             CloseCommand = new CloseCommand();
-            BrowseCommand = new BrowseCommand(this);
+            BrowseCommand = new BrowseCommand(ViewModel);
             TestCommand = new TestCommand(ViewModel);
         }
     }

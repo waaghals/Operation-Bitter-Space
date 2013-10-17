@@ -7,16 +7,24 @@ namespace Hexxagon.Models
 {
     class PlayerHexagon : Hexagon
     {
-        public Player Owner { get; set; }
-
         public override bool Available()
         {
             return false;
         }
 
-        public override bool IsOwned()
+        public override bool Selectable()
         {
-            return Owner != null;
+            throw new NotImplementedException();
+        }
+
+        public override bool Clickable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool OwnedBy(Player p)
+        {
+            return Owner == p;
         }
     }
 }

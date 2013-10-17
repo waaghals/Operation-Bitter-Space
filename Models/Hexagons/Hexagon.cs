@@ -11,9 +11,12 @@ namespace Hexxagon.Models
     public abstract class Hexagon : BaseNotifier
     {
         public Dictionary<Neighbour, Hexagon> Neighbours { get; set; }
+        public Player Owner { get; set; }
 
         public abstract bool Available();
-        public abstract bool IsOwned();
+        public abstract bool OwnedBy(Player p);
+        public abstract bool Selectable();
+        public abstract bool Clickable();
 
         //These methodes have been added so that code foot print stays readable
         public bool Has(Neighbour n)

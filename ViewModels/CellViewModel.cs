@@ -33,31 +33,30 @@ namespace Hexxagon.ViewModels
         }
 
         private Brush gradient;
-        public Brush Gradient 
-        { 
-            get 
-            { 
-                return gradient; 
-            } 
+        public Brush Gradient
+        {
+            get
+            {
+                return gradient;
+            }
             set
             {
-                SetProperty(ref gradient, value); 
-            } 
+                SetProperty(ref gradient, value);
+            }
         }
 
         #endregion
 
-        public CellViewModel(Hexagon h)
+        public CellViewModel(Hexagon h, GameViewModel currentGame)
         {
             Hex = h;
-            ClickCommand = new ClickCommand(this);
+            ClickCommand = new SelectCommand(h, currentGame);
             Gradient = Colorize();
 
 
-            if (Hex.IsOwned())
+            if (Hex.Owner != null)
             {
-                PlayerHexagon pHex = (PlayerHexagon)Hex;
-                SubscribeTo(pHex.Owner);
+                SubscribeTo(Hex.Owner);
             }
         }
 
@@ -67,10 +66,9 @@ namespace Hexxagon.ViewModels
             {
                 return CellGradient.FromHue(0, 0.0);
             }
-            else if (Hex.IsOwned())
+            else if (Hex.Owner != null)
             {
-                PlayerHexagon playerHex = (PlayerHexagon)Hex;
-                return CellGradient.FromHue(playerHex.Owner.Hue, 0.7);
+                return CellGradient.FromHue(Hex.Owner.Hue, 0.7);
             }
             return CellGradient.FromHue(0, 0.15);
         }

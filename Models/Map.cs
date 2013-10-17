@@ -17,20 +17,20 @@ namespace Hexxagon.Models
     {
         public void MapHexagons()
         {
-            Dictionary<Neighbour, Point3D> neighbours = new Dictionary<Neighbour, Point3D>();
-            Dictionary<Neighbour, Point> nn = new Dictionary<Neighbour, Point>();
+            //Dictionary<Neighbour, Point3D> neighbours = new Dictionary<Neighbour, Point3D>();
+            Dictionary<Neighbour, Point> neighbours = new Dictionary<Neighbour, Point>();
 
             foreach (Point key in Keys)
             {
                 Point C = key; //Current
 
-                nn.Clear();
-                nn.Add(Neighbour.North, new Point(C.X, C.Y - 1));
-                nn.Add(Neighbour.South, new Point(C.X, C.Y + 1));
-                nn.Add(Neighbour.NorthEast, new Point(C.X + 1, C.Y - 1));
-                nn.Add(Neighbour.NorthWest, new Point(C.X - 1, C.Y));
-                nn.Add(Neighbour.SouthEast, new Point(C.X - 1, C.Y + 1));
-                nn.Add(Neighbour.SouthWest, new Point(C.X + 1, C.Y));
+                neighbours.Clear();
+                neighbours.Add(Neighbour.North, new Point(C.X, C.Y - 1));
+                neighbours.Add(Neighbour.South, new Point(C.X, C.Y + 1));
+                neighbours.Add(Neighbour.NorthEast, new Point(C.X + 1, C.Y - 1));
+                neighbours.Add(Neighbour.NorthWest, new Point(C.X - 1, C.Y));
+                neighbours.Add(Neighbour.SouthEast, new Point(C.X - 1, C.Y + 1));
+                neighbours.Add(Neighbour.SouthWest, new Point(C.X + 1, C.Y));
 
                 //neighbours.Clear();
                 //neighbours.Add(Neighbour.North, new Point3D(C.X, C.Y + 1, C.Z - 1));
@@ -40,7 +40,7 @@ namespace Hexxagon.Models
                 //neighbours.Add(Neighbour.SouthEast, new Point3D(C.X + 1, C.Y - 1, C.Z));
                 //neighbours.Add(Neighbour.SouthWest, new Point3D(C.X - 1, C.Y, C.Z + 1));
 
-                foreach (KeyValuePair<Neighbour, Point> neighbour in nn)
+                foreach (KeyValuePair<Neighbour, Point> neighbour in neighbours)
                 {
                     CellViewModel current = this[key];
                     Point neighbourLocation = neighbour.Value;
@@ -81,6 +81,19 @@ namespace Hexxagon.Models
         //    base.Add(key, value);
         //}
 
+        public IEnumerable GetPlayers()
+        {
+            HashSet<Player> tested = new HashSet<Player>();
+            foreach (CellViewModel item in Values)
+            {
+                Player player = item.Hex.Owner;
+                if (player != null && !tested.Contains(player))
+                {
+                    yield return player;
+                    tested.Add(player);
+                }
+            }
+        }
     }
 
     public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyPropertyChanged, INotifyCollectionChanged

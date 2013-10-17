@@ -1,4 +1,5 @@
 ﻿using Hexxagon.Common;
+using Hexxagon.Common.Helpers;
 using Hexxagon.Controls;
 using Hexxagon.Models;
 using System;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
+
 
 namespace Hexxagon.ViewModels
 {
@@ -24,6 +26,10 @@ namespace Hexxagon.ViewModels
         {
             get
             {
+                if (turns.Count == 0)
+                {
+                    return null;
+                }
                 return turns.Peek();
             }
         }
@@ -31,8 +37,20 @@ namespace Hexxagon.ViewModels
         public GameViewModel()
         {
             Map = new Map();
+            Players = new ObservableCollection<Player>();
             SubscribeTo(Map);
-            turns = new Queue<Player>();
+        }
+
+        public void AddPlayersFromMap()
+        {
+            foreach (Player p in Map.GetPlayers())
+            {
+                Players.Add(p);
+            }
+            IList<Player> playerList = Players.ToList();
+            playerList.Shuffle();
+
+            turns = new Queue<Player>(playerList);
         }
 
         public void DoTurn()

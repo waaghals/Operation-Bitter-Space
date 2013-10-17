@@ -36,46 +36,45 @@ namespace Hexxagon
 
         private void AddTestGridData()
         {
-            hue = 0;
-            playerHex = new PlayerHexagon()
-            {
-                Owner = new Player()
-                {
-                    Name = "Patrick",
-                    Hue = 150
-                }
-            };
-            PlayerHexagon opponentHex = new PlayerHexagon()
-            {
-                Owner = new Player()
-                {
-                    Name = "Yorick",
-                    Hue = 200
-                }
-            };
-            OpenHexagon openHex = new OpenHexagon();
-            ClosedHexagon closedHex = new ClosedHexagon();
-            Hexagon[] hexes = new Hexagon[] { playerHex, opponentHex, openHex, closedHex };
-            Random ran = new Random();
-
-            //short hue = 1;
-            HexButton hex;
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    hex = new HexButton();
-                    //grid.Children.Add(hex);
-                    HexagonGrid.SetRow(hex, i);
-                    HexagonGrid.SetColumn(hex, j);
-
-
-                    Hexagon hexCell = hexes[ran.Next(hexes.Length)];
-                    hex.DataContext = new CellViewModel(hexCell);
-                    //hue += 3;
-                }
-            }
-            CreateTimer();
+           // hue = 0;
+           // playerHex = new PlayerHexagon()
+           // {
+           //     Owner = new Player()
+           //     {
+           //         Name = "Patrick",
+           //         Hue = 150
+           //     }
+           // };
+           // PlayerHexagon opponentHex = new PlayerHexagon()
+           // {
+           //     Owner = new Player()
+           //     {
+           //         Name = "Yorick",
+           //         Hue = 200
+           //     }
+           // };
+           // OpenHexagon openHex = new OpenHexagon();
+           // Hexagon[] hexes = new Hexagon[] { playerHex, opponentHex, openHex};
+           // Random ran = new Random();
+           //
+           // //short hue = 1;
+           // HexButton hex;
+           // for (int i = 0; i < 10; i++)
+           // {
+           //     for (int j = 0; j < 10; j++)
+           //     {
+           //         hex = new HexButton();
+           //         //grid.Children.Add(hex);
+           //         HexagonGrid.SetRow(hex, i);
+           //         HexagonGrid.SetColumn(hex, j);
+           //
+           //
+           //         Hexagon hexCell = hexes[ran.Next(hexes.Length)];
+           //         hex.DataContext = new CellViewModel(hexCell);
+           //         //hue += 3;
+           //     }
+           // }
+           // CreateTimer();
         }
 
         private void CreateTimer()
