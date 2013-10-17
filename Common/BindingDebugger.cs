@@ -11,14 +11,14 @@ namespace DebugDataBindings
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
 
-            //set a breakpoint here
+            //set a breakVector here
             return value;
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
 
-            //set a breakpoint here
+            //set a breakVector here
             return value;
         }
     }

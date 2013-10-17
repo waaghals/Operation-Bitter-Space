@@ -9,8 +9,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <Common:PointToXConverter x:Key="ConverterX" />
-        <Common:PointToYConverter x:Key="ConverterY" />
+        <Common:VectorToXConverter x:Key="ConverterX" />
+        <Common:VectorToYConverter x:Key="ConverterY" />
         <Debug:DebugConverter x:Key="BindingDebug" />
     </UserControl.Resources>
     <StackPanel>
@@ -44,7 +44,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="{Binding Path=Points}" Fill="{Binding Path=Player.Hue}" />
+                    <Rectangle Width="{Binding Path=Vectors}" Fill="{Binding Path=Player.Hue}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

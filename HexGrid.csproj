@@ -130,7 +130,7 @@
     <Compile Include="Common\Helpers\Gradient.cs" />
     <Compile Include="Common\Helpers\Shuffler.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\PointConverter.cs" />
+    <Compile Include="Common\VectorConverter.cs" />
     <Compile Include="Misc\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

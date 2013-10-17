@@ -1,10 +1,11 @@
 ﻿
 using Devcorp.Controls.Design;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Hexxagon.Helpers
 {
-    public class CellGradient
+    public class GradientHelper
     {
         #region Static Methods
 
@@ -16,8 +17,8 @@ namespace Hexxagon.Helpers
         public static Brush FromHue(short hue, double saturation)
         {
             LinearGradientBrush g = new LinearGradientBrush();
-            g.StartPoint = new System.Windows.Point(0, 0);
-            g.EndPoint = new System.Windows.Point(0, 1);
+            g.StartPoint = new Point(0, 0);
+            g.EndPoint = new Point(0, 1);
 
             g.GradientStops.Add(new GradientStop(HueToColor(hue, saturation, 0.95), 0));
             g.GradientStops.Add(new GradientStop(HueToColor(hue, saturation, 0.92), 0.5));

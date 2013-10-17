@@ -12,11 +12,6 @@ namespace Hexxagon.Models
             return false;
         }
 
-        public override bool Selectable()
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Clickable()
         {
             throw new NotImplementedException();

@@ -13,37 +13,44 @@ using System.Windows.Media.Media3D;
 
 namespace Hexxagon.Models
 {
-    public class Map : ObservableDictionary<Point, CellViewModel>
+    public class Map : ObservableDictionary<Vector, CellViewModel>
     {
         public void MapHexagons()
         {
-            //Dictionary<Neighbour, Point3D> neighbours = new Dictionary<Neighbour, Point3D>();
-            Dictionary<Neighbour, Point> neighbours = new Dictionary<Neighbour, Point>();
+            //Dictionary<Neighbour, Vector3D> neighbours = new Dictionary<Neighbour, Vector3D>();
+            Dictionary<Neighbour, Vector> neighbours = new Dictionary<Neighbour, Vector>();
 
-            foreach (Point key in Keys)
+            neighbours.Add(Neighbour.North, new Vector(0, 1));
+            neighbours.Add(Neighbour.South, new Vector(0, 1));
+            neighbours.Add(Neighbour.NorthEast, new Vector(1, -1));
+            neighbours.Add(Neighbour.NorthWest, new Vector(-1, 0));
+            neighbours.Add(Neighbour.SouthEast, new Vector(-1, 1));
+            neighbours.Add(Neighbour.SouthWest, new Vector(1, 0));
+
+            foreach (Vector location in Keys)
             {
-                Point C = key; //Current
-
-                neighbours.Clear();
-                neighbours.Add(Neighbour.North, new Point(C.X, C.Y - 1));
-                neighbours.Add(Neighbour.South, new Point(C.X, C.Y + 1));
-                neighbours.Add(Neighbour.NorthEast, new Point(C.X + 1, C.Y - 1));
-                neighbours.Add(Neighbour.NorthWest, new Point(C.X - 1, C.Y));
-                neighbours.Add(Neighbour.SouthEast, new Point(C.X - 1, C.Y + 1));
-                neighbours.Add(Neighbour.SouthWest, new Point(C.X + 1, C.Y));
+                
+                //neighbours.Clear();
+                //neighbours.Add(Neighbour.North, new Vector(C.X, C.Y - 1));
+                //neighbours.Add(Neighbour.South, new Vector(C.X, C.Y + 1));
+                //neighbours.Add(Neighbour.NorthEast, new Vector(C.X + 1, C.Y - 1));
+                //neighbours.Add(Neighbour.NorthWest, new Vector(C.X - 1, C.Y));
+                //neighbours.Add(Neighbour.SouthEast, new Vector(C.X - 1, C.Y + 1));
+                //neighbours.Add(Neighbour.SouthWest, new Vector(C.X + 1, C.Y));
 
                 //neighbours.Clear();
-                //neighbours.Add(Neighbour.North, new Point3D(C.X, C.Y + 1, C.Z - 1));
-                //neighbours.Add(Neighbour.South, new Point3D(C.X, C.Y - 1, C.Z + 1));
-                //neighbours.Add(Neighbour.NorthEast, new Point3D(C.X + 1, C.Y, C.Z - 1));
-                //neighbours.Add(Neighbour.NorthWest, new Point3D(C.X - 1, C.Y + 1, C.Z));
-                //neighbours.Add(Neighbour.SouthEast, new Point3D(C.X + 1, C.Y - 1, C.Z));
-                //neighbours.Add(Neighbour.SouthWest, new Point3D(C.X - 1, C.Y, C.Z + 1));
+                //neighbours.Add(Neighbour.North, new Vector3D(C.X, C.Y + 1, C.Z - 1));
+                //neighbours.Add(Neighbour.South, new Vector3D(C.X, C.Y - 1, C.Z + 1));
+                //neighbours.Add(Neighbour.NorthEast, new Vector3D(C.X + 1, C.Y, C.Z - 1));
+                //neighbours.Add(Neighbour.NorthWest, new Vector3D(C.X - 1, C.Y + 1, C.Z));
+                //neighbours.Add(Neighbour.SouthEast, new Vector3D(C.X + 1, C.Y - 1, C.Z));
+                //neighbours.Add(Neighbour.SouthWest, new Vector3D(C.X - 1, C.Y, C.Z + 1));
 
-                foreach (KeyValuePair<Neighbour, Point> neighbour in neighbours)
+                CellViewModel current = this[location];
+                foreach (KeyValuePair<Neighbour, Vector> neighbour in neighbours)
                 {
-                    CellViewModel current = this[key];
-                    Point neighbourLocation = neighbour.Value;
+                    Vector neighbourLocation = location + neighbour.Value;
+                    //Vector neighbourLocation = neighbour.Value;
 
                     if (ContainsKey(neighbourLocation))
                     {
@@ -62,17 +69,17 @@ namespace Hexxagon.Models
 
             //int z = x - (y - y % 2) / 2;
             //y = -x - z;
-            Point p = new Point(x, y);
+            Vector p = new Vector(x, y);
             base.Add(p, v);
         }
 
         //public void Add(int x, int y, int z, CellViewModel v)
         //{
-        //    Point3D p = new Point3D(x, y, z);
+        //    Vector3D p = new Vector3D(x, y, z);
         //    Add(p, v);
         //}
 
-        //public void Add(Point3D key, CellViewModel value)
+        //public void Add(Vector3D key, CellViewModel value)
         //{
         //    if (key.X + key.Y + key.Z != 0)
         //    {

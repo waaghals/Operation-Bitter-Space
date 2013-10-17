@@ -10,11 +10,11 @@ using System.Windows.Media.Media3D;
 
 namespace Hexxagon.Common
 {
-    class PointToXConverter : IValueConverter
+    class VectorToXConverter : IValueConverter
     {
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-            Point p = (Point)value;
+            Vector p = (Vector)value;
             return p.X;
         }
 
@@ -24,11 +24,11 @@ namespace Hexxagon.Common
         }
     }
 
-    class PointToYConverter : IValueConverter
+    class VectorToYConverter : IValueConverter
     {
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-            Point p = (Point)value;
+            Vector p = (Vector)value;
             return p.Y;
             //return p.Z + (p.X - p.X % 2) / 2;
         }

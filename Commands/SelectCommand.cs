@@ -17,14 +17,35 @@ namespace Hexxagon.Commands
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter) {
+        public bool CanExecute(object parameter)
+        {
             Player player = game.CurrentPlayer;
 
             return hex.OwnedBy(player);
         }
 
-        public void Execute(object parameter) {
-           
+        public void Execute(object parameter)
+        {
+            foreach (Hexagon neighbour in hex.Neighbours.Values)
+            {
+                foreach (Hexagon farNeighbour in neighbour.Neighbours.Values)
+                {
+                    HighlightNeighbour(hex, farNeighbour, Distance.Far);
+                    //Highlight far neighbour
+                }
+
+                //Highlight close neighbour
+                HighlightNeighbour(hex, neighbour, Distance.Close);
+            }
+        }
+
+        private void HighlightNeighbour(Hexagon source, Hexagon dest, Distance distance)
+        {
+            if (dest.Available())
+            {
+                OpenHexagon openDest = dest as OpenHexagon;
+                openDest.HighlightFrom(source, distance);
+            }
         }
     }
 }

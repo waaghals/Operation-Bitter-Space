@@ -15,8 +15,13 @@ namespace Hexxagon.Models
 
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);
-        public abstract bool Selectable();
         public abstract bool Clickable();
+
+
+        public Hexagon()
+        {
+            Neighbours = new Dictionary<Neighbour, Hexagon>();
+        }
 
         //These methodes have been added so that code foot print stays readable
         public bool Has(Neighbour n)
@@ -41,5 +46,12 @@ namespace Hexxagon.Models
             }
             Neighbours.Add(n, h);
         }
+    }
+
+    public enum Distance
+    {
+        Far,
+        Close,
+        OutOfReach
     }
 }

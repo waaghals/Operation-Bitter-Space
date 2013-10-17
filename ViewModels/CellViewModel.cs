@@ -51,7 +51,7 @@ namespace Hexxagon.ViewModels
         {
             Hex = h;
             ClickCommand = new SelectCommand(h, currentGame);
-            Gradient = Colorize();
+            Gradient = UpdateGradient();
 
 
             if (Hex.Owner != null)
@@ -60,17 +60,25 @@ namespace Hexxagon.ViewModels
             }
         }
 
-        private Brush Colorize()
+        private Brush UpdateGradient()
         {
-            if (Hex.Available())
+            if (Hex.Owner != null)
             {
-                return CellGradient.FromHue(0, 0.0);
-            }
-            else if (Hex.Owner != null)
+                return GradientHelper.FromHue(Hex.Owner.Hue, 0.7);
+            } return GradientHelper.FromHue(0, 0.0);
+        }
+
+        private Brush UpdateGradient(short hue, Distance distance)
+        {
+            if (distance == Distance.Close)
             {
-                return CellGradient.FromHue(Hex.Owner.Hue, 0.7);
+                return GradientHelper.FromHue(hue, 0.3);
             }
-            return CellGradient.FromHue(0, 0.15);
+            else
+            {
+                return GradientHelper.FromHue(hue, 0.1);
+            }
+            
         }
 
         protected override void ChangeHandler(object sender, PropertyChangedEventArgs e)
@@ -82,7 +90,14 @@ namespace Hexxagon.ViewModels
             {
                 //Updating the Colors directly wil result in modifing the UI from a non-UI thread, 
                 //which can't be done in WPF
-                Application.Current.Dispatcher.Invoke(new Action(() => Gradient = Colorize()));
+                Application.Current.Dispatcher.Invoke(new Action(() => Gradient = UpdateGradient()));
+            }
+
+            if (e.PropertyName == "Highlight")
+            {
+                OpenHexagon openHex = hex as OpenHexagon;
+                Action action = new Action(() => Gradient = UpdateGradient(openHex.highlightHue, openHex.highlightDistance));
+                Application.Current.Dispatcher.Invoke(action);
             }
         }
     }

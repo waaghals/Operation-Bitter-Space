@@ -55,6 +55,7 @@ namespace Hexxagon.Commands
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
                 }
             }
+            Game.Map.MapHexagons();
             Game.AddPlayersFromMap();
         }
     }
