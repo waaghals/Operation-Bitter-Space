@@ -1,9 +1,11 @@
 ﻿using Hexxagon.Common;
+using Hexxagon.Helpers;
 using Hexxagon.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace Hexxagon.Models
 {

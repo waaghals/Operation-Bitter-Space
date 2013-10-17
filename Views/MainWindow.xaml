@@ -10,10 +10,9 @@
                 <MenuItem Header="_Spel Openen..." Command="{Binding BrowseCommand}" />
                 <MenuItem Header="_Afsluiten" Command="{Binding CloseCommand}" />
                 <MenuItem Header="_Opslaan" Command="{Binding SaveCommand}" />
+                <MenuItem Header="_Test" Command="{Binding TestCommand}" />
             </MenuItem>
         </Menu>
-        <StackPanel>
-            <ItemsControl ItemsSource="{Binding Path=Content}"/>
-        </StackPanel>
+        <ContentControl Content="{Binding ViewModel}" />
     </DockPanel>    
 </Window>

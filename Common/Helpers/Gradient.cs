@@ -1,14 +1,18 @@
-﻿using Devcorp.Controls.Design;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using Devcorp.Controls.Design;
 using System.Windows.Media;
 
 namespace Hexxagon.Helpers
 {
     public class CellGradient
     {
+        #region Static Methods
+
+        public static Brush FromHue(short hue)
+        {
+            return FromHue(hue, 0.5);
+        }
+
         public static Brush FromHue(short hue, double saturation)
         {
             LinearGradientBrush g = new LinearGradientBrush();
@@ -35,5 +39,6 @@ namespace Hexxagon.Helpers
 
             return returnColor;
         }
+        #endregion
     }
 }
