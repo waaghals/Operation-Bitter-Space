@@ -40,11 +40,12 @@ namespace Hexxagon.Models
 
         public void Set(Neighbour n, Hexagon h)
         {
-            if (Has(n))
+            if (!Has(n))
             {
-                throw new ArgumentException("Hexagon already contains a Neighbour in location: " + n);
+                Neighbours.Add(n, h);
+                //throw new ArgumentException("Hexagon already contains a Neighbour in location: " + n);
             }
-            Neighbours.Add(n, h);
+            //Neighbours.Add(n, h);
         }
     }
 

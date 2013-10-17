@@ -20,7 +20,7 @@ namespace Hexxagon.Models
             //Dictionary<Neighbour, Vector3D> neighbours = new Dictionary<Neighbour, Vector3D>();
             Dictionary<Neighbour, Vector> neighbours = new Dictionary<Neighbour, Vector>();
 
-            neighbours.Add(Neighbour.North, new Vector(0, 1));
+            neighbours.Add(Neighbour.North, new Vector(0, -1));
             neighbours.Add(Neighbour.South, new Vector(0, 1));
             neighbours.Add(Neighbour.NorthEast, new Vector(1, -1));
             neighbours.Add(Neighbour.NorthWest, new Vector(-1, 0));
@@ -29,7 +29,7 @@ namespace Hexxagon.Models
 
             foreach (Vector location in Keys)
             {
-                
+
                 //neighbours.Clear();
                 //neighbours.Add(Neighbour.North, new Vector(C.X, C.Y - 1));
                 //neighbours.Add(Neighbour.South, new Vector(C.X, C.Y + 1));

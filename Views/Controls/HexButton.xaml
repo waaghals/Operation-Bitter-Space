@@ -18,9 +18,9 @@
                                             <DrawingGroup>
                                                 <GeometryDrawing Brush="{Binding Path=Gradient}"  
                            Geometry="M 250,0 L 750,0 L 1000,433 L 750,866 L 250,866 L 0,433 Z">
-                                                    <GeometryDrawing.Pen>
+                                                    <!--<GeometryDrawing.Pen>
                                                         <Pen Brush="Black" Thickness="10" LineJoin="Round"/>
-                                                    </GeometryDrawing.Pen>
+                                                    </GeometryDrawing.Pen> -->
                                                 </GeometryDrawing>
                                             </DrawingGroup>
                                         </DrawingImage.Drawing>
