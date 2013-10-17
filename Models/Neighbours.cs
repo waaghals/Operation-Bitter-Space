@@ -1,6 +1,6 @@
 ﻿namespace Hexxagon.Models
 {
-    public enum Direction
+    public enum Neighbour
     {
         North,
         NorthWest,
