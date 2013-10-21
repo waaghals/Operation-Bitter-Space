@@ -1,6 +1,5 @@
 ﻿using Hexxagon.Models;
 using Hexxagon.ViewModels;
-using Polenter.Serialization;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -23,9 +22,7 @@ namespace Hexxagon.Commands
 
         public void Execute(object parameter)
         {
-            var serializer = new SharpSerializer();
-
-            serializer.Serialize(vm.Map, "test.xml");
+           
         }
     }
 }
