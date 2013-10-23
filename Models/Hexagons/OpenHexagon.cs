@@ -7,17 +7,12 @@ namespace Hexxagon.Models
 {
     class OpenHexagon : Hexagon
     {
-        public short highlightHue;
-        public Distance highlightDistance;
+        private PlayerHexagon source;
+        private Distance sourceDistance;
 
         public override bool Available()
         {
             return true;
-        }
-
-        public override bool Clickable()
-        {
-            throw new NotImplementedException();
         }
 
         public override bool OwnedBy(Player p)
@@ -27,9 +22,31 @@ namespace Hexxagon.Models
 
         public void HighlightFrom(Hexagon from, Distance distance)
         {
-            highlightHue = from.Owner.Hue;
-            highlightDistance = distance;
+            source = from as PlayerHexagon;
+            sourceDistance = distance;
             OnPropertyChanged("Highlight");
+        }
+
+        public override bool Clonable
+        {
+            get { return sourceDistance == Distance.Close; }
+        }
+
+        public override bool Targetable
+        {
+            get { return sourceDistance == Distance.Far; }
+        }
+
+        public override short Hue
+        {
+            get
+            {
+                if (source != null)
+                {
+                    return source.Owner.Hue;
+                }
+                return 0; //White
+            }
         }
     }
 }

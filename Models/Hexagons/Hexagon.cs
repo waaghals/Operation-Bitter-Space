@@ -12,11 +12,18 @@ namespace Hexxagon.Models
     {
         public Dictionary<Neighbour, Hexagon> Neighbours { get; set; }
         public Player Owner { get; set; }
+        public abstract short Hue { get; }
+        public abstract bool Clonable { get; }
+        public abstract bool Targetable { get; }
         public string Name { get; set; }
 
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);
-        public abstract bool Clickable();
+
+        public virtual void Highlight(Hexagon source, int steps)
+        {
+
+        }
 
 
         public Hexagon()

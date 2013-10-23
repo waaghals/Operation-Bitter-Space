@@ -58,28 +58,28 @@ namespace Hexxagon.ViewModels
             {
                 SubscribeTo(Hex.Owner);
             }
+            SubscribeTo(Hex);
         }
 
         private Brush UpdateGradient()
         {
             if (Hex.Owner != null)
             {
-                return GradientHelper.FromHue(Hex.Owner.Hue, 0.7);
-            } return GradientHelper.FromHue(0, 0.0);
+                return GradientHelper.FromHue(Hex.Hue, 0.7);
+            }
+            else if (Hex.Clonable)
+            {
+                return GradientHelper.FromHue(Hex.Hue, 0.4);
+            }
+            else if (Hex.Targetable)
+            {
+                return GradientHelper.FromHue(Hex.Hue, 0.2);
+            }
+
+            //white
+            return GradientHelper.FromHue(0, 0.0);
         }
 
-        private Brush UpdateGradient(short hue, Distance distance)
-        {
-            if (distance == Distance.Close)
-            {
-                return GradientHelper.FromHue(hue, 0.3);
-            }
-            else
-            {
-                return GradientHelper.FromHue(hue, 0.1);
-            }
-            
-        }
 
         protected override void ChangeHandler(object sender, PropertyChangedEventArgs e)
         {
@@ -95,9 +95,11 @@ namespace Hexxagon.ViewModels
 
             if (e.PropertyName == "Highlight")
             {
-                OpenHexagon openHex = hex as OpenHexagon;
-                Action action = new Action(() => Gradient = UpdateGradient(openHex.highlightHue, openHex.highlightDistance));
-                Application.Current.Dispatcher.Invoke(action);
+                if (sender.Equals(Hex))
+                {
+                    Application.Current.Dispatcher.Invoke(() => Gradient = UpdateGradient());
+                }
+                    
             }
         }
     }
