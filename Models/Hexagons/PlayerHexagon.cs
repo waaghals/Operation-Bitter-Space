@@ -16,7 +16,8 @@ namespace Hexxagon.Models
 
         public override bool OwnedBy(Player p)
         {
-            return Owner == p;
+            bool isOwner = Owner.Equals(p);
+            return isOwner;
         }
 
         public override bool Clonable

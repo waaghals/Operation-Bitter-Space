@@ -41,5 +41,22 @@ namespace Hexxagon.Models
             }
         }
         #endregion
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Player p = obj as Player;
+            if ((Object)p == null)
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return (Name == p.Name) && (Hue == p.Hue);
+        }
     }
 }

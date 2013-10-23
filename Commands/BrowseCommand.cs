@@ -26,57 +26,42 @@ namespace Hexxagon.Commands
 
         public void Execute(object parameter)
         {
+            //For testing purpeses now, a browse and load function needs to be implemented here
             Game.Map.Clear();
-            PlayerHexagon playerHex = new PlayerHexagon()
-            {
-                Owner = new Player()
-                {
-                    Name = "Patrick",
-                    Hue = 150
-                }
-            };
-            PlayerHexagon opponentHex = new PlayerHexagon()
-            {
-                Owner = new Player()
-                {
-                    Name = "Yorick",
-                    Hue = 200
-                }
-            };
-            OpenHexagon openHex = new OpenHexagon();
-            Hexagon[] hexes = new Hexagon[] { playerHex, opponentHex, openHex };
             Random ran = new Random();
 
+            Hexagon hexCell;
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    Hexagon hexCell = hexes[ran.Next(hexes.Length)];
-                    //Hexagon hexCell = new OpenHexagon();
-                    //int random = ran.Next(hexes.Length);
-                    //if (random == 2)
-                    //{
-                    //    hexCell = new PlayerHexagon()
-                    //    {
-                    //        Owner = new Player()
-                    //        {
-                    //            Name = "Yorick",
-                    //            Hue = 200
-                    //        }
-                    //    };
-                    //}
-                    //if (random == 0)
-                    //{
-                    //    hexCell = new PlayerHexagon()
-                    //    {
-                    //        Owner = new Player()
-                    //        {
-                    //            Name = "Patrick",
-                    //            Hue = 150
-                    //        }
-                    //    };
-                    //}
+                    switch (ran.Next(3))
+                    {
+                        case 1:
+                            hexCell = new PlayerHexagon()
+                            {
+                                Owner = new Player()
+                                {
+                                    Name = "Yorick",
+                                    Hue = 200
+                                }
+                            };
+                            break;
+                        case 2:
+                            hexCell = new PlayerHexagon()
+                            {
+                                Owner = new Player()
+                                {
+                                    Name = "Patrick",
+                                    Hue = 150
+                                }
+                            };
+                            break;
 
+                        default:
+                            hexCell = new OpenHexagon();
+                            break;
+                    }
                     hexCell.Name += "X:" + i + " Y:" + j;
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
                 }

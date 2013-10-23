@@ -22,8 +22,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <!--<Button Content="{Binding Converter={StaticResource BindingDebug}}" />-->
-                    <Controls:HexButton DataContext="{Binding Value}"/>
+                    <Controls:HexButton DataContext="{Binding Value, Converter={StaticResource BindingDebug}}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             
