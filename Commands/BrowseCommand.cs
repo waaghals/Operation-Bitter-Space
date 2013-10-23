@@ -35,6 +35,12 @@ namespace Hexxagon.Commands
             {
                 for (int j = 0; j < 10; j++)
                 {
+                    if (i == 3 && j == 5)
+                        continue;
+
+                    if (i == 7 && j == 2)
+                        continue;
+
                     switch (ran.Next(3))
                     {
                         case 1:
