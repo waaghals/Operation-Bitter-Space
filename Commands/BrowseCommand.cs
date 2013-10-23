@@ -52,6 +52,32 @@ namespace Hexxagon.Commands
                 for (int j = 0; j < 10; j++)
                 {
                     Hexagon hexCell = hexes[ran.Next(hexes.Length)];
+                    //Hexagon hexCell = new OpenHexagon();
+                    //int random = ran.Next(hexes.Length);
+                    //if (random == 2)
+                    //{
+                    //    hexCell = new PlayerHexagon()
+                    //    {
+                    //        Owner = new Player()
+                    //        {
+                    //            Name = "Yorick",
+                    //            Hue = 200
+                    //        }
+                    //    };
+                    //}
+                    //if (random == 0)
+                    //{
+                    //    hexCell = new PlayerHexagon()
+                    //    {
+                    //        Owner = new Player()
+                    //        {
+                    //            Name = "Patrick",
+                    //            Hue = 150
+                    //        }
+                    //    };
+                    //}
+
+                    hexCell.Name += "X:" + i + " Y:" + j;
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
                 }
             }

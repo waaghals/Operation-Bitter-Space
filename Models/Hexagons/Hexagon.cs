@@ -12,6 +12,7 @@ namespace Hexxagon.Models
     {
         public Dictionary<Neighbour, Hexagon> Neighbours { get; set; }
         public Player Owner { get; set; }
+        public string Name { get; set; }
 
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);

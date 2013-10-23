@@ -26,6 +26,7 @@ namespace Hexxagon.Commands
 
         public void Execute(object parameter)
         {
+            Console.WriteLine(hex.Name);
             foreach (Hexagon neighbour in hex.Neighbours.Values)
             {
                 foreach (Hexagon farNeighbour in neighbour.Neighbours.Values)
@@ -41,6 +42,8 @@ namespace Hexxagon.Commands
 
         private void HighlightNeighbour(Hexagon source, Hexagon dest, Distance distance)
         {
+            if (distance == Distance.Close)
+            Console.WriteLine(distance + " " + dest.Name);
             if (dest.Available())
             {
                 OpenHexagon openDest = dest as OpenHexagon;
