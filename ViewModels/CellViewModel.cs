@@ -65,11 +65,11 @@ namespace Hexxagon.ViewModels
         {
             if (Hex.Owner != null)
             {
-                return GradientHelper.FromHue(Hex.Hue, 0.7);
+                return GradientHelper.FromHue(Hex.Hue, 0.9);
             }
             else if (Hex.Clonable)
             {
-                return GradientHelper.FromHue(Hex.Hue, 0.4);
+                return GradientHelper.FromHue(Hex.Hue, 0.6);
             }
             else if (Hex.Targetable)
             {
