@@ -18,7 +18,7 @@ namespace Hexxagon.Controls
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class HexButton : ToggleButton 
+    public partial class HexButton : Button 
     {
         public HexButton()
         {
