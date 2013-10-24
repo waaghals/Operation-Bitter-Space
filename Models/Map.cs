@@ -18,14 +18,23 @@ namespace Hexxagon.Models
         public void MapHexagons()
         {
             //Dictionary<Neighbour, Vector3D> neighbours = new Dictionary<Neighbour, Vector3D>();
+            Dictionary<Neighbour, Vector> oddNeighbours = new Dictionary<Neighbour, Vector>();
+            Dictionary<Neighbour, Vector> evenNeighbours = new Dictionary<Neighbour, Vector>();
             Dictionary<Neighbour, Vector> neighbours = new Dictionary<Neighbour, Vector>();
 
-            neighbours.Add(Neighbour.North, new Vector(0, -1));
-            neighbours.Add(Neighbour.South, new Vector(0, 1));
-            neighbours.Add(Neighbour.NorthEast, new Vector(1, -1));
-            neighbours.Add(Neighbour.NorthWest, new Vector(-1, 0));
-            neighbours.Add(Neighbour.SouthEast, new Vector(-1, 1));
-            neighbours.Add(Neighbour.SouthWest, new Vector(1, 0));
+            oddNeighbours.Add(Neighbour.North, new Vector(0, -1));
+            oddNeighbours.Add(Neighbour.South, new Vector(0, 1));
+            oddNeighbours.Add(Neighbour.NorthEast, new Vector(1, 0));
+            oddNeighbours.Add(Neighbour.NorthWest, new Vector(-1, 0));
+            oddNeighbours.Add(Neighbour.SouthEast, new Vector(1, 1));
+            oddNeighbours.Add(Neighbour.SouthWest, new Vector(-1, 1));
+
+            evenNeighbours.Add(Neighbour.North, new Vector(0, -1));
+            evenNeighbours.Add(Neighbour.South, new Vector(0, 1));
+            evenNeighbours.Add(Neighbour.NorthEast, new Vector(1, -1));
+            evenNeighbours.Add(Neighbour.NorthWest, new Vector(-1, -1));
+            evenNeighbours.Add(Neighbour.SouthEast, new Vector(1, 0));
+            evenNeighbours.Add(Neighbour.SouthWest, new Vector(-1, 0));
 
             foreach (Vector location in Keys)
             {
@@ -47,6 +56,14 @@ namespace Hexxagon.Models
                 //neighbours.Add(Neighbour.SouthWest, new Vector3D(C.X - 1, C.Y, C.Z + 1));
 
                 CellViewModel current = this[location];
+                if (location.X%2==0)
+                {
+                    neighbours = evenNeighbours;
+                }
+                else
+                {
+                    neighbours = oddNeighbours;
+                }
                 foreach (KeyValuePair<Neighbour, Vector> neighbour in neighbours)
                 {
                     Vector neighbourLocation = location + neighbour.Value;
