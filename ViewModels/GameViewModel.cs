@@ -33,6 +33,8 @@ namespace Hexxagon.ViewModels
                 return turns.Peek();
             }
         }
+
+        public Cell SelectedCell { get; set; }
         
         public GameViewModel()
         {

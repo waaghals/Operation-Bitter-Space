@@ -26,6 +26,18 @@ namespace Hexxagon.Commands
 
         public void Execute(object parameter)
         {
+            if (game.SelectedCell != null)
+            foreach (Cell neighbour in game.SelectedCell.Neighbours.Values)
+            {
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                {
+                    //Highlight far neighbour
+                    HighlightNeighbour(hex, farNeighbour, Distance.OutOfReach);
+                }
+            }
+
+            game.SelectedCell = hex;
+
             foreach (Cell neighbour in hex.Neighbours.Values)
             {
                 foreach (Cell farNeighbour in neighbour.Neighbours.Values)
