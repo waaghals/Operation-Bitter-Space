@@ -28,6 +28,7 @@ namespace Hexxagon.ViewModels
 
         private void InitCommands()
         {
+            SaveCommand = new SaveCommand(ViewModel);
             CloseCommand = new CloseCommand();
             BrowseCommand = new BrowseCommand(ViewModel);
             TestCommand = new TestCommand(ViewModel);
