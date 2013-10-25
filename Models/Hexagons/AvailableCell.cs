@@ -29,7 +29,7 @@ namespace Hexxagon.Models
                 if (source != null)
                     return source.Hue;
 
-                return 0;
+                return 60;
             }
         }
 

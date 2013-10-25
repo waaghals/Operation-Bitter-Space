@@ -64,21 +64,22 @@ namespace Hexxagon.ViewModels
         {
             if (Hex.Owned())
             {
-                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.9);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 1);
             }
             else if (Hex.Clonable)
             {
-                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.4);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.6);
             }
             else if (Hex.Targetable)
             {
-                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.1);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.3);
             }
             else if (Hex.Available())
             {
+                //return Brushes.White;
                 return GradientHelper.FromHue(0, 0.0);
             }
-            return Brushes.White;
+            return Brushes.Black;
         }
 
 
