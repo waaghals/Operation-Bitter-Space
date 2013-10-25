@@ -6,10 +6,10 @@ namespace Hexxagon.Commands
 {
     internal class SelectCommand : ICommand
     {
-        private Hexagon hex;
+        private Cell hex;
         private GameViewModel game;
 
-        public SelectCommand(Hexagon h, GameViewModel g)
+        public SelectCommand(Cell h, GameViewModel g)
         {
             hex = h;
             game = g;
@@ -26,28 +26,27 @@ namespace Hexxagon.Commands
 
         public void Execute(object parameter)
         {
-            Console.WriteLine(hex.Name);
-            foreach (Hexagon neighbour in hex.Neighbours.Values)
+            foreach (Cell neighbour in hex.Neighbours.Values)
             {
-                foreach (Hexagon farNeighbour in neighbour.Neighbours.Values)
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
                 {
-                    HighlightNeighbour(hex, farNeighbour, Distance.Far);
                     //Highlight far neighbour
+                    HighlightNeighbour(hex, farNeighbour, Distance.Far);
                 }
+            }
 
+            foreach (Cell neighbour in hex.Neighbours.Values)
+            {
                 //Highlight close neighbour
                 HighlightNeighbour(hex, neighbour, Distance.Close);
             }
         }
 
-        private void HighlightNeighbour(Hexagon source, Hexagon dest, Distance distance)
+        private void HighlightNeighbour(Cell source, Cell dest, Distance distance)
         {
-            if (distance == Distance.Close)
-            Console.WriteLine(distance + " " + dest.Name);
             if (dest.Available())
             {
-                OpenHexagon openDest = dest as OpenHexagon;
-                openDest.HighlightFrom(source, distance);
+                dest.HighlightFrom(source, distance);
             }
         }
     }

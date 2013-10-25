@@ -23,73 +23,13 @@ namespace Hexxagon
     /// </summary>
     public partial class GridWindow : Window
     {
-        private int hue;
-        PlayerHexagon playerHex;
+
         public GridWindow()
         {
             InitializeComponent();
 
             DataContext = new MainViewModel();
-            //AddTestGridData();
-            
-        }
 
-        private void AddTestGridData()
-        {
-           // hue = 0;
-           // playerHex = new PlayerHexagon()
-           // {
-           //     Owner = new Player()
-           //     {
-           //         Name = "Patrick",
-           //         Hue = 150
-           //     }
-           // };
-           // PlayerHexagon opponentHex = new PlayerHexagon()
-           // {
-           //     Owner = new Player()
-           //     {
-           //         Name = "Yorick",
-           //         Hue = 200
-           //     }
-           // };
-           // OpenHexagon openHex = new OpenHexagon();
-           // Hexagon[] hexes = new Hexagon[] { playerHex, opponentHex, openHex};
-           // Random ran = new Random();
-           //
-           // //short hue = 1;
-           // HexButton hex;
-           // for (int i = 0; i < 10; i++)
-           // {
-           //     for (int j = 0; j < 10; j++)
-           //     {
-           //         hex = new HexButton();
-           //         //grid.Children.Add(hex);
-           //         HexagonGrid.SetRow(hex, i);
-           //         HexagonGrid.SetColumn(hex, j);
-           //
-           //
-           //         Hexagon hexCell = hexes[ran.Next(hexes.Length)];
-           //         hex.DataContext = new CellViewModel(hexCell);
-           //         //hue += 3;
-           //     }
-           // }
-           // CreateTimer();
-        }
-
-        private void CreateTimer()
-        {
-            Timer aTimer = new Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(UpdateColor);
-            aTimer.Interval = 60/24;
-            aTimer.Enabled = true;
-        }
-
-        // Specify what you want to happen when the Elapsed event is raised.
-        private void UpdateColor(object source, ElapsedEventArgs e)
-        {
-            hue += 1;
-            playerHex.Owner.Hue = (short)(hue % 349);
         }
     }
 }

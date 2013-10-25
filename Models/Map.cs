@@ -110,7 +110,12 @@ namespace Hexxagon.Models
             HashSet<Player> tested = new HashSet<Player>();
             foreach (CellViewModel item in Values)
             {
-                Player player = item.Hex.Owner;
+                Player player = null;
+                if (item.Hex.Owned())
+                {
+                    player = (item.Hex as AvailableCell).Owner;
+                }
+
                 if (player != null && !tested.Contains(player))
                 {
                     yield return player;

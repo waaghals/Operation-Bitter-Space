@@ -30,21 +30,15 @@ namespace Hexxagon.Commands
             Game.Map.Clear();
             Random ran = new Random();
 
-            Hexagon hexCell;
+            Cell hexCell;
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (i == 3 && j == 5)
-                        continue;
-
-                    if (i == 7 && j == 2)
-                        continue;
-
-                    switch (ran.Next(3))
+                    switch (ran.Next(4))
                     {
                         case 1:
-                            hexCell = new PlayerHexagon()
+                            hexCell = new AvailableCell()
                             {
                                 Owner = new Player()
                                 {
@@ -54,7 +48,7 @@ namespace Hexxagon.Commands
                             };
                             break;
                         case 2:
-                            hexCell = new PlayerHexagon()
+                            hexCell = new AvailableCell()
                             {
                                 Owner = new Player()
                                 {
@@ -65,11 +59,19 @@ namespace Hexxagon.Commands
                             break;
 
                         default:
-                            hexCell = new OpenHexagon();
+                            hexCell = new AvailableCell();
                             break;
                     }
-                    hexCell.Name += "X:" + i + " Y:" + j;
+
+                    if (i == 3 && j == 5)
+                        hexCell = new UnavailableCell();
+
+                    if (i == 7 && j == 2)
+                        hexCell = new UnavailableCell();
+                    // hexCell.Name += "X:" + i + " Y:" + j;
+
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
+                    
                 }
             }
             Game.Map.MapHexagons();

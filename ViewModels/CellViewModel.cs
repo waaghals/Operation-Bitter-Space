@@ -19,8 +19,8 @@ namespace Hexxagon.ViewModels
         public ICommand ClickCommand { get; set; }
         public ICommand SecondClickCommand { get; set; }
 
-        private Hexagon hex;
-        public Hexagon Hex
+        private Cell hex;
+        public Cell Hex
         {
             get
             {
@@ -47,37 +47,38 @@ namespace Hexxagon.ViewModels
 
         #endregion
 
-        public CellViewModel(Hexagon h, GameViewModel currentGame)
+        public CellViewModel(Cell h, GameViewModel currentGame)
         {
             Hex = h;
             ClickCommand = new SelectCommand(h, currentGame);
             Gradient = UpdateGradient();
 
-
-            if (Hex.Owner != null)
+            if (Hex.Owned())
             {
-                SubscribeTo(Hex.Owner);
+                SubscribeTo((Hex as AvailableCell).Owner);
             }
             SubscribeTo(Hex);
         }
 
         private Brush UpdateGradient()
         {
-            if (Hex.Owner != null)
+            if (Hex.Owned())
             {
-                return GradientHelper.FromHue(Hex.Hue, 0.9);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.9);
             }
             else if (Hex.Clonable)
             {
-                return GradientHelper.FromHue(Hex.Hue, 0.6);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.4);
             }
             else if (Hex.Targetable)
             {
-                return GradientHelper.FromHue(Hex.Hue, 0.2);
+                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.1);
             }
-
-            //white
-            return GradientHelper.FromHue(0, 0.0);
+            else if (Hex.Available())
+            {
+                return GradientHelper.FromHue(0, 0.0);
+            }
+            return Brushes.White;
         }
 
 
@@ -99,7 +100,7 @@ namespace Hexxagon.ViewModels
                 {
                     Application.Current.Dispatcher.Invoke(() => Gradient = UpdateGradient());
                 }
-                    
+
             }
         }
     }

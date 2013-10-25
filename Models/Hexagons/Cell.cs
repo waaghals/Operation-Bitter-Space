@@ -8,27 +8,19 @@ using System.Windows;
 
 namespace Hexxagon.Models
 {
-    public abstract class Hexagon : BaseNotifier
+    public abstract class Cell : BaseNotifier
     {
-        public Dictionary<Neighbour, Hexagon> Neighbours { get; set; }
-        public Player Owner { get; set; }
-        public abstract short Hue { get; }
+        public Dictionary<Neighbour, Cell> Neighbours { get; set; }
         public abstract bool Clonable { get; }
         public abstract bool Targetable { get; }
-        public string Name { get; set; }
-
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);
+        public abstract bool Owned();
+        public abstract void HighlightFrom(Cell from, Distance distance);
 
-        public virtual void Highlight(Hexagon source, int steps)
+        public Cell()
         {
-
-        }
-
-
-        public Hexagon()
-        {
-            Neighbours = new Dictionary<Neighbour, Hexagon>();
+            Neighbours = new Dictionary<Neighbour, Cell>();
         }
 
         //These methodes have been added so that code foot print stays readable
@@ -37,7 +29,7 @@ namespace Hexxagon.Models
             return Neighbours.ContainsKey(n);
         }
 
-        public Hexagon Get(Neighbour n)
+        public Cell Get(Neighbour n)
         {
             if (Has(n))
             {
@@ -46,14 +38,13 @@ namespace Hexxagon.Models
             return null;
         }
 
-        public void Set(Neighbour n, Hexagon h)
+        public void Set(Neighbour n, Cell h)
         {
-            if (!Has(n))
-            {
-                Neighbours.Add(n, h);
-                //throw new ArgumentException("Hexagon already contains a Neighbour in location: " + n);
-            }
-            //Neighbours.Add(n, h);
+            //if (!Has(n))
+            //{
+            //    throw new ArgumentException("Hexagon already contains a Neighbour in location: " + n);
+            //}
+            Neighbours.Add(n, h);
         }
     }
 

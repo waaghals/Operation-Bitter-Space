@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hexxagon.Models
 {
-    class PlayerHexagon : Hexagon
+  /*  class PlayerHexagon : Cell
     {
 
         public override bool Available()
@@ -34,5 +34,5 @@ namespace Hexxagon.Models
         {
             get { return Owner.Hue; }
         }
-    }
+    }*/
 }
