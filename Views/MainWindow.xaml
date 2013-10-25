@@ -13,6 +13,8 @@
                 <MenuItem Header="_Test" Command="{Binding TestCommand}" />
             </MenuItem>
         </Menu>
-        <ContentControl Content="{Binding ViewModel}" />
+        <Border BorderThickness="20" BorderBrush="Black">
+        <ContentControl Content="{Binding ViewModel}"/>
+        </Border>
     </DockPanel>    
 </Window>
