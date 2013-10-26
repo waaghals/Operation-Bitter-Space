@@ -17,7 +17,7 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-            return false;
+            return ViewModel.HasStarted;
         }
 
         public void Execute(object parameter)

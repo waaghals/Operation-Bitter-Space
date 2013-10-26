@@ -17,7 +17,6 @@ namespace Hexxagon.ViewModels
         public ICommand BrowseCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        public ICommand LoadCommand { get; set; }
         public ICommand TestCommand { get; set; }
         public GameViewModel ViewModel { get; private set; }
 

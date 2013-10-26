@@ -14,22 +14,28 @@
         <Debug:DebugConverter x:Key="BindingDebug" />
     </UserControl.Resources>
     <StackPanel  Background="Black">
-        <ItemsControl>
+        <ItemsControl ItemsSource="{Binding Map}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!-- , Converter={StaticResource BindingDebug} -->
+                    <Controls:HexButton DataContext="{Binding Value}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="{x:Type FrameworkElement}">
                     <Setter Property="Grid.Row" Value="{Binding Key, Converter={StaticResource ConverterY}}"/>
                     <Setter Property="Grid.Column" Value="{Binding Key, Converter={StaticResource ConverterX}}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
-
+            
         </ItemsControl>
-
+        
         <ItemsControl ItemsSource="{Binding Scores}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
