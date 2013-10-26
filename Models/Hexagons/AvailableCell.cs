@@ -131,7 +131,7 @@ namespace Hexxagon.Models
         private void TakeOver(Player NewOwner)
         {
             Owner = NewOwner;
-            //OnPropertyChanged("Hue");
+            OnPropertyChanged("Hue");
         }
     }
 }
