@@ -29,32 +29,7 @@ namespace Hexxagon.Commands
         {
             if (hex.OwnedBy(game.CurrentPlayer))
             {
-                if (game.SelectedCell != null)
-                    foreach (Cell neighbour in game.SelectedCell.Neighbours.Values)
-                    {
-                        foreach (Cell farNeighbour in neighbour.Neighbours.Values)
-                        {
-                            //Highlight far neighbour
-                            HighlightNeighbour(hex, farNeighbour, Distance.OutOfReach);
-                        }
-                    }
-
-                game.SelectedCell = hex;
-
-                foreach (Cell neighbour in hex.Neighbours.Values)
-                {
-                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
-                    {
-                        //Highlight far neighbour
-                        HighlightNeighbour(hex, farNeighbour, Distance.Far);
-                    }
-                }
-
-                foreach (Cell neighbour in hex.Neighbours.Values)
-                {
-                    //Highlight close neighbour
-                    HighlightNeighbour(hex, neighbour, Distance.Close);
-                } 
+                ((AvailableCell)hex).HighLightAll(game);
             }
             else if (hex.GetType() == typeof(UnavailableCell))
             {
@@ -63,11 +38,13 @@ namespace Hexxagon.Commands
             else if (((AvailableCell)hex).Clonable)
             {
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
+                ((AvailableCell)game.SelectedCell).HighLightAll(game);
             }
             else if (((AvailableCell)hex).Targetable)
             {
                 ((AvailableCell)game.SelectedCell).Jump();
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
+                ((AvailableCell)game.SelectedCell).HighLightAll(game);
             }
 
         }

@@ -11,6 +11,51 @@ namespace Hexxagon.Models
         private Distance sourceDistance;
         public Player Owner { get; set; }
 
+        public void HighLightAll(Hexxagon.ViewModels.GameViewModel game)
+        {
+            if (game.SelectedCell == this)
+            {
+                foreach (Cell neighbour in Neighbours.Values)
+                {
+                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                    {
+                        if (farNeighbour.Available())
+                        {
+                            farNeighbour.HighlightFrom(this, Distance.OutOfReach);
+                        }
+                    }
+                }
+
+                game.SelectedCell = null;
+            }
+            else
+            {
+                if (game.SelectedCell != null)
+                {
+                    ((AvailableCell)game.SelectedCell).HighLightAll(game);
+                }
+                foreach (Cell neighbour in Neighbours.Values)
+                {
+                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                    {
+                        if (farNeighbour.Available())
+                        {
+                            farNeighbour.HighlightFrom(this, Distance.Far);
+                        }
+                    }
+                }
+
+                foreach (Cell neighbour in Neighbours.Values)
+                {
+                    if (neighbour.Available())
+                    {
+                        neighbour.HighlightFrom(this, Distance.Close);
+                    }
+                }
+                game.SelectedCell = this;
+            }
+        }
+
         public override void HighlightFrom(Cell from, Distance distance)
         {
             source = from as AvailableCell;
@@ -64,6 +109,7 @@ namespace Hexxagon.Models
         public void Clone(Player newPlayer)
         {
             Owner = newPlayer;
+            OnPropertyChanged("Hue");
         }
 
         public void Jump()
