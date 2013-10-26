@@ -26,7 +26,7 @@ namespace Hexxagon.ViewModels
         {
             get
             {
-                if (turns.Count == 0)
+                if (turns == null)
                 {
                     return null;
                 }

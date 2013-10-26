@@ -17,12 +17,18 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-            return false;
+           // return ViewModel.CurrentPlayer != null;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            Console.WriteLine("Saving");
+            if (ViewModel.CurrentPlayer != null)
+            {
+
+                Console.WriteLine("Saving");
+
+            }
         }
     }
 }

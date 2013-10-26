@@ -52,13 +52,23 @@ namespace Hexxagon.Models
         {
             if (Owner == null)
                 return false;
-            
+
             return Owner.Equals(p);
         }
 
         public override bool Owned()
         {
             return Owner != null;
+        }
+
+        public void Clone(Player newPlayer)
+        {
+            Owner = newPlayer;
+        }
+
+        public void Jump()
+        {
+            Owner = null;
         }
     }
 }

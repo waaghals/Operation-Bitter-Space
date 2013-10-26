@@ -19,39 +19,57 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-            Player player = game.CurrentPlayer;
-
-            return hex.OwnedBy(player);
+            //Player player = game.CurrentPlayer;
+            //
+            //return hex.OwnedBy(player);
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            if (game.SelectedCell != null)
-            foreach (Cell neighbour in game.SelectedCell.Neighbours.Values)
+            if (hex.OwnedBy(game.CurrentPlayer))
             {
-                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                if (game.SelectedCell != null)
+                    foreach (Cell neighbour in game.SelectedCell.Neighbours.Values)
+                    {
+                        foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                        {
+                            //Highlight far neighbour
+                            HighlightNeighbour(hex, farNeighbour, Distance.OutOfReach);
+                        }
+                    }
+
+                game.SelectedCell = hex;
+
+                foreach (Cell neighbour in hex.Neighbours.Values)
                 {
-                    //Highlight far neighbour
-                    HighlightNeighbour(hex, farNeighbour, Distance.OutOfReach);
+                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                    {
+                        //Highlight far neighbour
+                        HighlightNeighbour(hex, farNeighbour, Distance.Far);
+                    }
                 }
-            }
 
-            game.SelectedCell = hex;
-
-            foreach (Cell neighbour in hex.Neighbours.Values)
-            {
-                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                foreach (Cell neighbour in hex.Neighbours.Values)
                 {
-                    //Highlight far neighbour
-                    HighlightNeighbour(hex, farNeighbour, Distance.Far);
-                }
+                    //Highlight close neighbour
+                    HighlightNeighbour(hex, neighbour, Distance.Close);
+                } 
+            }
+            else if (hex.GetType() == typeof(UnavailableCell))
+            {
+                return;
+            }
+            else if (((AvailableCell)hex).Clonable)
+            {
+                ((AvailableCell)hex).Clone(game.CurrentPlayer);
+            }
+            else if (((AvailableCell)hex).Targetable)
+            {
+                ((AvailableCell)game.SelectedCell).Jump();
+                ((AvailableCell)hex).Clone(game.CurrentPlayer);
             }
 
-            foreach (Cell neighbour in hex.Neighbours.Values)
-            {
-                //Highlight close neighbour
-                HighlightNeighbour(hex, neighbour, Distance.Close);
-            }
         }
 
         private void HighlightNeighbour(Cell source, Cell dest, Distance distance)
