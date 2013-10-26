@@ -40,6 +40,7 @@ namespace Hexxagon.Commands
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
                 ((AvailableCell)hex).TakeOverAll();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
+                game.DoTurn();
             }
             else if (((AvailableCell)hex).Targetable)
             {
@@ -47,6 +48,7 @@ namespace Hexxagon.Commands
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
                 ((AvailableCell)hex).TakeOverAll();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
+                game.DoTurn();
             }
 
         }

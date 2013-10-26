@@ -47,6 +47,7 @@ namespace Hexxagon.ViewModels
         {
             foreach (Player p in Map.GetPlayers())
             {
+                if (!Players.Contains(p))
                 Players.Add(p);
             }
             IList<Player> playerList = Players.ToList();
