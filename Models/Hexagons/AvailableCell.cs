@@ -116,5 +116,22 @@ namespace Hexxagon.Models
         {
             Owner = null;
         }
+
+        public void TakeOverAll()
+        {
+            foreach (Cell neighbour in Neighbours.Values)
+            {
+                if (neighbour.Owned())
+                {
+                    ((AvailableCell)neighbour).TakeOver(Owner);
+                }
+            }
+        }
+
+        private void TakeOver(Player NewOwner)
+        {
+            Owner = NewOwner;
+            //OnPropertyChanged("Hue");
+        }
     }
 }

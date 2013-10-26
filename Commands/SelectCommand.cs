@@ -38,12 +38,14 @@ namespace Hexxagon.Commands
             else if (((AvailableCell)hex).Clonable)
             {
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
+                ((AvailableCell)hex).TakeOverAll();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
             }
             else if (((AvailableCell)hex).Targetable)
             {
                 ((AvailableCell)game.SelectedCell).Jump();
                 ((AvailableCell)hex).Clone(game.CurrentPlayer);
+                ((AvailableCell)hex).TakeOverAll();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
             }
 
