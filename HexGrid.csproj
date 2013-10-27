@@ -156,7 +156,6 @@
     <Compile Include="Models\Hexagons\AvailableCell.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Hexagons\Cell.cs" />
-    <Compile Include="Models\Hexagons\PlayerHexagon.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
