@@ -69,7 +69,7 @@ namespace Hexxagon.Commands
                     if (i == 7 && j == 2)
                         hexCell = new UnavailableCell();
                     // hexCell.Name += "X:" + i + " Y:" + j;
-
+                        
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
                     
                 }
