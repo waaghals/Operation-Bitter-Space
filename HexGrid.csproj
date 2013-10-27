@@ -118,13 +118,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\LoadCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SelectCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\BrowseCommand.cs" />
-    <Compile Include="Commands\TestCommand.cs" />
     <Compile Include="Common\BaseNotifier.cs" />
     <Compile Include="Common\BindingDebugger.cs" />
     <Compile Include="Common\Helpers\Gradient.cs" />

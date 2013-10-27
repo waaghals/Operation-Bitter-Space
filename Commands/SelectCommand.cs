@@ -4,7 +4,7 @@ using System;
 using System.Windows.Input;
 namespace Hexxagon.Commands
 {
-    internal class SelectCommand : BaseCommand
+    internal class SelectCommand : ICommand
     {
         private Cell hex;
         private GameViewModel game;
@@ -14,7 +14,13 @@ namespace Hexxagon.Commands
             hex = h;
             game = g;
         }
-        
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
         public bool CanExecute(object parameter)
         {
             if (game.SelectedCell == null || game.SelectedCell.Equals(hex))

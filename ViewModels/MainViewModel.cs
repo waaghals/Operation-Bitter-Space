@@ -18,7 +18,6 @@ namespace Hexxagon.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
-        public ICommand TestCommand { get; set; }
         public GameViewModel ViewModel { get; private set; }
 
         public MainViewModel()
@@ -33,7 +32,6 @@ namespace Hexxagon.ViewModels
             LoadCommand = new LoadCommand(ViewModel);
             CloseCommand = new CloseCommand();
             BrowseCommand = new BrowseCommand(ViewModel);
-            TestCommand = new TestCommand(ViewModel);
         }
     }
 }
