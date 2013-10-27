@@ -15,38 +15,47 @@ namespace Hexxagon.Commands
             game = g;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            //Player player = game.CurrentPlayer;
-            //
-            //return hex.OwnedBy(player);
-            return true;
+            if (game.SelectedCell == null || game.SelectedCell.Equals(hex))
+            {
+                Player player = game.CurrentPlayer;
+                return hex.OwnedBy(player);
+            }
+
+            return hex.Clonable || hex.Targetable;
+
         }
 
         public void Execute(object parameter)
         {
+            AvailableCell availableHex = hex as AvailableCell;
             if (hex.OwnedBy(game.CurrentPlayer))
             {
-                ((AvailableCell)hex).HighLightAll(game);
+                availableHex.HighLightAll(game);
             }
             else if (hex.GetType() == typeof(UnavailableCell))
             {
                 return;
             }
-            else if (((AvailableCell)hex).Clonable)
+            else if (availableHex.Clonable)
             {
-                ((AvailableCell)hex).Clone(game.CurrentPlayer);
-                ((AvailableCell)hex).TakeOverAll();
+                availableHex.Clone(game.CurrentPlayer);
+                availableHex.TakeOverNeighbours();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
                 game.DoTurn();
             }
-            else if (((AvailableCell)hex).Targetable)
+            else if (availableHex.Targetable)
             {
                 ((AvailableCell)game.SelectedCell).Jump();
-                ((AvailableCell)hex).Clone(game.CurrentPlayer);
-                ((AvailableCell)hex).TakeOverAll();
+                availableHex.Clone(game.CurrentPlayer);
+                availableHex.TakeOverNeighbours();
                 ((AvailableCell)game.SelectedCell).HighLightAll(game);
                 game.DoTurn();
             }

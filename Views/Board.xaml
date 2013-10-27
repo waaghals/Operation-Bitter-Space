@@ -13,7 +13,7 @@
         <Common:VectorToYConverter x:Key="ConverterY" />
         <Debug:DebugConverter x:Key="BindingDebug" />
     </UserControl.Resources>
-    <StackPanel  Background="Black">
+    <StackPanel>
         <ItemsControl ItemsSource="{Binding Map}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

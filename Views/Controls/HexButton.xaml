@@ -18,9 +18,9 @@
                                             <DrawingGroup>
                                                 <GeometryDrawing Brush="{Binding Path=Gradient}"  
                            Geometry="M 250,0 L 750,0 L 1000,433 L 750,866 L 250,866 L 0,433 Z">
-                                                   <!-- <GeometryDrawing.Pen>
-                                                        <Pen Brush="Black" Thickness="10" LineJoin="Round"/>
-                                                    </GeometryDrawing.Pen> -->
+                                                    <GeometryDrawing.Pen>
+                                                        <Pen x:Name="Border" Brush="Black" Thickness="0" LineJoin="Round"/>
+                                                    </GeometryDrawing.Pen>
                                                 </GeometryDrawing>
                                             </DrawingGroup>
                                         </DrawingImage.Drawing>
@@ -31,11 +31,11 @@
                         </Grid>
                         <ControlTemplate.Triggers>                 
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.9" />
-                            </Trigger>
-                           <!-- <Trigger Property="IsChecked" Value="True">
                                 <Setter Property="Opacity" Value="0.7" />
-                            </Trigger> -->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.7" />
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>

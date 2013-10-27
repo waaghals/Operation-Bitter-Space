@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hexxagon.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Hexxagon.Models
         private Distance sourceDistance;
         public Player Owner { get; set; }
 
-        public void HighLightAll(Hexxagon.ViewModels.GameViewModel game)
+        public void HighLightAll(GameViewModel game)
         {
             if (game.SelectedCell == this)
             {
@@ -80,12 +81,12 @@ namespace Hexxagon.Models
 
         public override bool Clonable
         {
-            get { return sourceDistance == Distance.Close; }
+            get { return sourceDistance == Distance.Close && !Owned(); }
         }
 
         public override bool Targetable
         {
-            get { return sourceDistance == Distance.Far; }
+            get { return sourceDistance == Distance.Far && !Owned(); }
         }
 
         public override bool Available()
@@ -117,7 +118,7 @@ namespace Hexxagon.Models
             Owner = null;
         }
 
-        public void TakeOverAll()
+        public void TakeOverNeighbours()
         {
             foreach (Cell neighbour in Neighbours.Values)
             {

@@ -68,18 +68,20 @@ namespace Hexxagon.ViewModels
             }
             else if (Hex.Clonable)
             {
-                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.6);
+                int hue = ((Hex as AvailableCell).Hue + 30) % 349;
+                return GradientHelper.FromHue((short)hue, 0.8);
             }
             else if (Hex.Targetable)
             {
-                return GradientHelper.FromHue((Hex as AvailableCell).Hue, 0.3);
+                int hue = ((Hex as AvailableCell).Hue + 60) % 349;
+                return GradientHelper.FromHue((short)hue, 0.6);
             }
             else if (Hex.Available())
             {
                 //return Brushes.White;
                 return GradientHelper.FromHue(0, 0.0);
             }
-            return Brushes.Black;
+            return Brushes.White;
         }
 
 

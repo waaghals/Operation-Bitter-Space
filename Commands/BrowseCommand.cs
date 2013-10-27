@@ -53,7 +53,7 @@ namespace Hexxagon.Commands
                                 Owner = new Player()
                                 {
                                     Name = "Patrick",
-                                    Hue = 60
+                                    Hue = 349
                                 }
                             };
                             break;

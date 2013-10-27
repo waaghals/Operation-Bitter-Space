@@ -14,7 +14,7 @@
                 <MenuItem Header="_Test" Command="{Binding TestCommand}" />
             </MenuItem>
         </Menu>
-        <Border BorderThickness="20" BorderBrush="Black">
+        <Border BorderThickness="20">
         <ContentControl Content="{Binding ViewModel}"/>
         </Border>
     </DockPanel>    
