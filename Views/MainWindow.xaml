@@ -8,10 +8,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Bestand">
-                <MenuItem Header="_Spel Openen..." Command="{Binding BrowseCommand}" />
-                <MenuItem Header="_Afsluiten" Command="{Binding CloseCommand}" />
+                <MenuItem Header="_Random Spel Starten" Command="{Binding BrowseCommand}" />
                 <MenuItem Header="_Opslaan" Command="{Binding SaveCommand}" />
+                <MenuItem Header="_Laden" Command="{Binding LoadCommand}" />
                 <MenuItem Header="_Test" Command="{Binding TestCommand}" />
+                <MenuItem Header="_Afsluiten" Command="{Binding CloseCommand}" />
             </MenuItem>
         </Menu>
         <Border BorderThickness="20">
