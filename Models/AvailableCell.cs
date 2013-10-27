@@ -105,6 +105,7 @@ namespace Hexxagon.Models
                 if (neighbour.Owned())
                 {
                     ((AvailableCell)neighbour).Owner = this.Owner;
+                    ((AvailableCell)neighbour).OnPropertyChanged("Hue");
                     
                 }
             }
