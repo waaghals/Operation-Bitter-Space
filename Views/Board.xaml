@@ -44,7 +44,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="{Binding Path=Vectors}" Fill="{Binding Path=Player.Hue}" />
+                    <Rectangle Width="{Binding Path=Points}" Fill="{Binding Path=Player.Hue}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

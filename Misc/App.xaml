@@ -3,12 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModels="clr-namespace:Hexxagon.ViewModels"
     xmlns:Views="clr-namespace:Hexxagon.Views"
-   xmlns:Controls="clr-namespace:Hexxagon.Controls"
+    xmlns:Controls="clr-namespace:Hexxagon.Controls"
     xmlns:Sys="clr-namespace:System;assembly=mscorlib"
     StartupUri="/Views/MainWindow.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type ViewModels:GameViewModel}">
             <Views:Board />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModels:GameCreatorViewModel}">
+            <Views:GameCreator />
         </DataTemplate>
     </Application.Resources>
 </Application>

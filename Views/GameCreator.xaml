@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Hexxagon.Views.GameCreator"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:Controls="clr-namespace:Hexxagon.Controls" 
+      xmlns:Helpers="clr-namespace:Hexxagon.Helpers" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             MinWidth="350" MinHeight="500" Height="Auto" Width="Auto">
+    <StackPanel>
+        <DataGrid ItemsSource="{Binding Players}"  AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <Helpers:GradientConverter x:Key="GradientConverter" />
+                <DataTemplate x:Key="DateTemplate" >
+                    <Rectangle Fill="{Binding Hue, Converter={StaticResource GradientConverter}}" />
+                </DataTemplate>
+
+                <DataTemplate x:Key="EditingDateTemplate">
+                    <Slider Minimum="0" Maximum="349" IsSnapToTickEnabled="True" TickFrequency="15" Value="{Binding Hue}" />
+                </DataTemplate>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam"  Binding="{Binding Name}" Width="3*"/>
+                <DataGridTemplateColumn Header="Tint" CellEditingTemplate="{StaticResource EditingDateTemplate}" CellTemplate="{StaticResource DateTemplate}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="Aantal Gaten" />
+            <Slider Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="10" x:Name="holesSlider" IsSnapToTickEnabled="True" TickFrequency="1" />
+            <Label Grid.Column="2" Grid.Row="0" Content="{Binding ElementName=holesSlider, Path=Value}" />
+
+            <Label Grid.Column="0" Grid.Row="1" Content="Breedte" />
+            <Slider Grid.Column="1" Grid.Row="1" Minimum="4" Maximum="20" x:Name="widhtSlider" IsSnapToTickEnabled="True" TickFrequency="1" />
+            <Label Grid.Column="2" Grid.Row="1" Content="{Binding ElementName=widhtSlider, Path=Value}" />
+
+            <Label Grid.Column="0" Grid.Row="2" Content="Hoogte" />
+            <Slider Grid.Column="1" Grid.Row="2" Minimum="4" Maximum="20" x:Name="heightSlider" IsSnapToTickEnabled="True" TickFrequency="1" />
+            <Label Grid.Column="2" Grid.Row="2" Content="{Binding ElementName=heightSlider, Path=Value}" />
+
+            <Label Grid.Column="0" Grid.Row="3" Content="Dichtheid" />
+            <Slider Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="10" x:Name="densitySlider" IsSnapToTickEnabled="True" TickFrequency="1" />
+            <Label Grid.Column="2" Grid.Row="3" Content="{Binding ElementName=densitySlider, Path=Value}" />
+
+            <Button Grid.Column="2" Grid.Row="4" Content="Spel starten" Command="{Binding GenerateGameCommand}" />
+        </Grid>
+
+    </StackPanel>
+</UserControl>

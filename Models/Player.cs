@@ -3,14 +3,16 @@ using Hexxagon.Helpers;
 using Hexxagon.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
 
 namespace Hexxagon.Models
 {
-    public class Player : BaseNotifier
+    public class Player : BaseNotifier 
     {
+
         #region Properties
         private string name;
         public string Name

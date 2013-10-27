@@ -4,29 +4,39 @@ using Hexxagon.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 namespace Hexxagon.Commands
 {
-    internal class BrowseCommand : ICommand
+    internal class RandomGameCommand : ICommand
     {
         public GameViewModel Game { get; set; }
+        private MainViewModel mainWindow;
+        private ObservableCollection<Player> players;
 
-        public BrowseCommand(GameViewModel vm)
+        public RandomGameCommand(MainViewModel mainWindow, ObservableCollection<Player> players)
         {
-            Game = vm;
+            this.mainWindow = mainWindow;
+            this.players = players;
+            Game = new GameViewModel();
         }
-        public event EventHandler CanExecuteChanged;
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return players.Count >= 2;
         }
 
         public void Execute(object parameter)
         {
-            //For testing purpeses now, a browse and load function needs to be implemented here
             Game.Map.Clear();
             Random ran = new Random();
 
@@ -74,8 +84,12 @@ namespace Hexxagon.Commands
                     
                 }
             }
+
             Game.Map.MapHexagons();
             Game.AddPlayersFromMap();
+
+            mainWindow.MainContent = Game;
+            Console.WriteLine("Random Game Created");
         }
     }
 }

@@ -18,20 +18,33 @@ namespace Hexxagon.ViewModels
         public ICommand CloseCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
-        public GameViewModel ViewModel { get; private set; }
+        public ICommand NewRandomGame { get; set; }
+
+        private BaseViewModel mainContent;
+        public BaseViewModel MainContent
+        {
+            get
+            {
+                return mainContent;
+            }
+            set
+            {
+                SetProperty(ref mainContent, value);
+            }
+        }
 
         public MainViewModel()
         {
-            ViewModel = new GameViewModel();
+            MainContent = new GameViewModel();
             InitCommands();
         }
 
         private void InitCommands()
         {
-            SaveCommand = new SaveCommand(ViewModel);
-            LoadCommand = new LoadCommand(ViewModel);
+            SaveCommand = new SaveCommand((GameViewModel)MainContent);
+            LoadCommand = new LoadCommand((GameViewModel)MainContent);
             CloseCommand = new CloseCommand();
-            BrowseCommand = new BrowseCommand(ViewModel);
+            NewRandomGame = new OpenGameCreatorCommand(this);
         }
     }
 }

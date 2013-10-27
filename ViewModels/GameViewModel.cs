@@ -61,5 +61,10 @@ namespace Hexxagon.ViewModels
             Player p = turns.Dequeue();
             turns.Enqueue(p);
         }
+
+        public void CalculateScore()
+        {
+
+        }
     }
 }
