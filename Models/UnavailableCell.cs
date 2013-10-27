@@ -7,9 +7,6 @@ namespace Hexxagon.Models
 {
     class UnavailableCell : Cell
     {
-        //private PlayerHexagon source;
-        private Distance sourceDistance;
-
         public override bool Available()
         {
             return false;
@@ -19,13 +16,6 @@ namespace Hexxagon.Models
         {
             return false;
         }
-
-       // public void HighlightFrom(Cell from, Distance distance)
-       // {
-       //     source = from as PlayerHexagon;
-       //     sourceDistance = distance;
-       //     OnPropertyChanged("Highlight");
-       // }
 
         public override bool Clonable
         {

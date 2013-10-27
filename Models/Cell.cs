@@ -24,6 +24,7 @@ namespace Hexxagon.Models
         }
 
         //These methodes have been added so that code foot print stays readable
+        #region Dictionary Methods
         public bool Has(Neighbour n)
         {
             return Neighbours.ContainsKey(n);
@@ -46,12 +47,6 @@ namespace Hexxagon.Models
             //}
             Neighbours.Add(n, h);
         }
-    }
-
-    public enum Distance
-    {
-        OutOfReach,
-        Far,
-        Close
+        #endregion
     }
 }

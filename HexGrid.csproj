@@ -133,7 +133,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Hexagons\UnavailableCell.cs" />
+    <Compile Include="Models\Distance.cs" />
+    <Compile Include="Models\UnavailableCell.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="Views\Board.xaml.cs">
@@ -153,9 +154,9 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Neighbours.cs" />
     <Compile Include="Models\Map.cs" />
-    <Compile Include="Models\Hexagons\AvailableCell.cs" />
+    <Compile Include="Models\AvailableCell.cs" />
     <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\Hexagons\Cell.cs" />
+    <Compile Include="Models\Cell.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
