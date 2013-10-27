@@ -71,7 +71,7 @@ namespace Hexxagon.ViewModels
                 int hue = ((Hex as AvailableCell).Hue + 30) % 349;
                 return GradientHelper.FromHue((short)hue, 0.8);
             }
-            else if (Hex.Targetable)
+            else if (Hex.Jumpable)
             {
                 int hue = ((Hex as AvailableCell).Hue + 60) % 349;
                 return GradientHelper.FromHue((short)hue, 0.6);

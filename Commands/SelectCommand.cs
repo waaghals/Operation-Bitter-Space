@@ -6,15 +6,18 @@ namespace Hexxagon.Commands
 {
     internal class SelectCommand : ICommand
     {
+        #region Fields
         private Cell hex;
+        private AvailableCell availableHex;
         private GameViewModel game;
-
+        #endregion
+        
         public SelectCommand(Cell h, GameViewModel g)
         {
             hex = h;
+            availableHex = h as AvailableCell;
             game = g;
         }
-
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -29,44 +32,60 @@ namespace Hexxagon.Commands
                 return hex.OwnedBy(player);
             }
 
-            return hex.Clonable || hex.Targetable;
+            return hex.Clonable || hex.Jumpable;
         }
 
         public void Execute(object parameter)
         {
-            AvailableCell availableHex = hex as AvailableCell;
-            if (hex.OwnedBy(game.CurrentPlayer))
+            if (hex.OwnedBy(game.CurrentPlayer)) //Clicked on player owned cell, highlight possible actions
             {
-                availableHex.HighLightAll(game);
+                if (game.SelectedCell == availableHex) //Deselected previous selection
+                {
+                    DeselectAction();
+                }
+                else
+                {
+                    SelectAction();
+                }
             }
-            else if (hex.GetType() == typeof(UnavailableCell))
+            else if (availableHex.Clonable) //Clone target clicked, clone the hex
             {
-                return;
+                CloneAction();
             }
-            else if (availableHex.Clonable)
+            else if (availableHex.Jumpable) //Jump target clicked, jump to the new location
             {
-                availableHex.Clone(game.CurrentPlayer);
-                availableHex.TakeOverNeighbours();
-                ((AvailableCell)game.SelectedCell).HighLightAll(game);
-                game.DoTurn();
+                JumpAction();
             }
-            else if (availableHex.Targetable)
-            {
-                ((AvailableCell)game.SelectedCell).Jump();
-                availableHex.Clone(game.CurrentPlayer);
-                availableHex.TakeOverNeighbours();
-                ((AvailableCell)game.SelectedCell).HighLightAll(game);
-                game.DoTurn();
-            }
-
         }
 
-        private void HighlightNeighbour(Cell source, Cell dest, Distance distance)
+        #region Actions
+        private void JumpAction()
         {
-            if (dest.Available())
-            {
-                dest.HighlightFrom(source, distance);
-            }
+            game.SelectedCell.JumpTo(availableHex);
+            availableHex.TakeOverNeighbours();
+            DeselectAction();
+            game.DoTurn();
         }
+
+        private void CloneAction()
+        {
+            game.SelectedCell.CloneTo(availableHex);
+            availableHex.TakeOverNeighbours();
+            DeselectAction();
+            game.DoTurn();
+        }
+
+        private void SelectAction()
+        {
+            availableHex.ShowNeighbours();
+            game.SelectedCell = availableHex;
+        }
+
+        private void DeselectAction()
+        {
+            game.SelectedCell.HideNeighbours();
+            game.SelectedCell = null;
+        }
+        #endregion
     }
 }

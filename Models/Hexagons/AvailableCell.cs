@@ -12,48 +12,39 @@ namespace Hexxagon.Models
         private Distance sourceDistance;
         public Player Owner { get; set; }
 
-        public void HighLightAll(GameViewModel game)
+        public void ShowNeighbours()
         {
-            if (game.SelectedCell == this)
+            foreach (Cell neighbour in Neighbours.Values)
             {
-                foreach (Cell neighbour in Neighbours.Values)
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
                 {
-                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                    if (farNeighbour.Available())
                     {
-                        if (farNeighbour.Available())
-                        {
-                            farNeighbour.HighlightFrom(this, Distance.OutOfReach);
-                        }
+                        farNeighbour.HighlightFrom(this, Distance.Far);
                     }
                 }
-
-                game.SelectedCell = null;
             }
-            else
-            {
-                if (game.SelectedCell != null)
-                {
-                    ((AvailableCell)game.SelectedCell).HighLightAll(game);
-                }
-                foreach (Cell neighbour in Neighbours.Values)
-                {
-                    foreach (Cell farNeighbour in neighbour.Neighbours.Values)
-                    {
-                        if (farNeighbour.Available())
-                        {
-                            farNeighbour.HighlightFrom(this, Distance.Far);
-                        }
-                    }
-                }
 
-                foreach (Cell neighbour in Neighbours.Values)
+            foreach (Cell neighbour in Neighbours.Values)
+            {
+                if (neighbour.Available())
                 {
-                    if (neighbour.Available())
+                    neighbour.HighlightFrom(this, Distance.Close);
+                }
+            }
+        }
+
+        public void HideNeighbours()
+        {
+            foreach (Cell neighbour in Neighbours.Values)
+            {
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                {
+                    if (farNeighbour.Available())
                     {
-                        neighbour.HighlightFrom(this, Distance.Close);
+                        farNeighbour.HighlightFrom(this, Distance.OutOfReach);
                     }
                 }
-                game.SelectedCell = this;
             }
         }
 
@@ -84,7 +75,7 @@ namespace Hexxagon.Models
             get { return sourceDistance == Distance.Close && !Owned(); }
         }
 
-        public override bool Targetable
+        public override bool Jumpable
         {
             get { return sourceDistance == Distance.Far && !Owned(); }
         }
@@ -107,32 +98,28 @@ namespace Hexxagon.Models
             return Owner != null;
         }
 
-        public void Clone(Player newPlayer)
-        {
-            Owner = newPlayer;
-            OnPropertyChanged("Hue");
-        }
-
-        public void Jump()
-        {
-            Owner = null;
-        }
-
         public void TakeOverNeighbours()
         {
             foreach (Cell neighbour in Neighbours.Values)
             {
                 if (neighbour.Owned())
                 {
-                    ((AvailableCell)neighbour).TakeOver(Owner);
+                    ((AvailableCell)neighbour).Owner = this.Owner;
+                    
                 }
             }
+            OnPropertyChanged("Hue");
         }
 
-        private void TakeOver(Player NewOwner)
+        internal void JumpTo(AvailableCell dest)
         {
-            Owner = NewOwner;
-            OnPropertyChanged("Hue");
+            dest.Owner = this.Owner;
+            this.Owner = null;
+        }
+
+        internal void CloneTo(AvailableCell dest)
+        {
+            dest.Owner = this.Owner;
         }
     }
 }

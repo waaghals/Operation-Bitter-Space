@@ -34,7 +34,7 @@ namespace Hexxagon.ViewModels
             }
         }
 
-        public Cell SelectedCell { get; set; }
+        public AvailableCell SelectedCell { get; set; }
         
         public GameViewModel()
         {

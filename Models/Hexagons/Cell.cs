@@ -12,7 +12,7 @@ namespace Hexxagon.Models
     {
         public Dictionary<Neighbour, Cell> Neighbours { get; set; }
         public abstract bool Clonable { get; }
-        public abstract bool Targetable { get; }
+        public abstract bool Jumpable { get; }
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);
         public abstract bool Owned();

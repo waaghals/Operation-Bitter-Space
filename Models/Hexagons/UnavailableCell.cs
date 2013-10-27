@@ -32,7 +32,7 @@ namespace Hexxagon.Models
             get { return false; }
         }
       
-        public override bool Targetable
+        public override bool Jumpable
         {
             get { return false; }
         }
