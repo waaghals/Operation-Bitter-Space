@@ -56,7 +56,7 @@ namespace Hexxagon.Models
                 //neighbours.Add(Neighbour.SouthWest, new Vector3D(C.X - 1, C.Y, C.Z + 1));
 
                 CellViewModel current = this[location];
-                if (location.X%2==0)
+                if (location.X % 2 == 0)
                 {
                     neighbours = evenNeighbours;
                 }
@@ -121,67 +121,6 @@ namespace Hexxagon.Models
                     yield return player;
                     tested.Add(player);
                 }
-            }
-        }
-    }
-
-    public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyPropertyChanged, INotifyCollectionChanged
-    {
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        public event NotifyCollectionChangedEventHandler CollectionChanged = delegate { };
-
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedAction action, object value)
-        {
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(sender, new NotifyCollectionChangedEventArgs(action, value));
-            }
-        }
-
-        private void OnPropertyChanged(object sender, string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public new void Add(TKey key, TValue value)
-        {
-            base.Add(key, value);
-            OnCollectionChanged(this, NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
-
-            //OnPropertyChanged(this, "Values");
-            //OnPropertyChanged(this, "Keys");
-            //OnPropertyChanged(this, "Count");
-        }
-
-        public new bool Remove(TKey key)
-        {
-            var kvp = base[key];
-            var result = base.Remove(key);
-            if (result)
-            {
-                OnCollectionChanged(this, NotifyCollectionChangedAction.Remove, kvp);
-
-                //OnPropertyChanged(this, "Values");
-                //OnPropertyChanged(this, "Keys");
-                //OnPropertyChanged(this, "Count");
-            }
-            return result;
-        }
-
-        public new TValue this[TKey key]
-        {
-            get
-            {
-                return base[key];
-            }
-            set
-            {
-                base[key] = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
             }
         }
     }
