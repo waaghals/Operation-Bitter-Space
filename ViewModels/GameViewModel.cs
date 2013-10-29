@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
@@ -35,7 +36,7 @@ namespace Hexxagon.ViewModels
         }
 
         public AvailableCell SelectedCell { get; set; }
-        
+
         public GameViewModel()
         {
             Map = new Map();
@@ -48,7 +49,7 @@ namespace Hexxagon.ViewModels
             foreach (Player p in Map.GetPlayers())
             {
                 if (!Players.Contains(p))
-                Players.Add(p);
+                    Players.Add(p);
             }
             IList<Player> playerList = Players.ToList();
             playerList.Shuffle();
@@ -59,20 +60,31 @@ namespace Hexxagon.ViewModels
         public void DoTurn()
         {
             Player p = turns.Dequeue();
-            Console.WriteLine(GameOverCheck());
             turns.Enqueue(p);
+
+            while (GameOverCheck(turns.Peek()))
+            {
+                turns.Dequeue();
+                if (turns.Count() == 0)
+                    break;
+            }
+            if (turns.Count() < 2)
+            {
+                Application.Current.Shutdown();
+            }
+
         }
 
-        private string GameOverCheck()
+        private bool GameOverCheck(Player p)
         {
             foreach (CellViewModel cell in Map.Values)
             {
-                if ((cell.Hex.OwnedBy(turns.Peek()) && cell.Hex.CanMove()))
+                if ((cell.Hex.OwnedBy(p) && cell.Hex.CanMove()))
                 {
-                    return "spel kan door";
+                    return false;
                 }
             }
-            return "Game Stopt";
+            return true;
         }
     }
 }
