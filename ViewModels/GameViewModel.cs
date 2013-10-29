@@ -1,4 +1,5 @@
-﻿using Hexxagon.Common.Helpers;
+﻿using Hexxagon.Common;
+using Hexxagon.Common.Helpers;
 using Hexxagon.Controls;
 using Hexxagon.Models;
 using System;
