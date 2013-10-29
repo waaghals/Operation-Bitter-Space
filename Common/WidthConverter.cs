@@ -1,25 +1,26 @@
-﻿
-
+﻿using Hexxagon.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Media3D;
 
-namespace DebugDataBindings
+namespace Hexxagon.Common
 {
-    public class DebugConverter : IValueConverter
+    class WidthConverter : IValueConverter
     {
-
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-            //set a breakVector here
-            return value;
+            string returnValue = value + "*";
+            return returnValue;
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-
-            //set a breakVector here
             return value;
         }
     }
 }
-

@@ -1,17 +1,14 @@
-﻿
-
+﻿using Hexxagon.Helpers;
 using System;
 using System.Windows.Data;
 
-namespace DebugDataBindings
+namespace Hexxagon.Common.Helpers
 {
-    public class DebugConverter : IValueConverter
+    public class GradientConverter : IValueConverter
     {
-
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-            //set a breakVector here
-            return value;
+            return GradientHelper.FromHue((short)value, 1);
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
@@ -22,4 +19,3 @@ namespace DebugDataBindings
         }
     }
 }
-

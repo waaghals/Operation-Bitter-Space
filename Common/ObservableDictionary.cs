@@ -35,22 +35,23 @@ namespace Hexxagon.Common
             base.Add(key, value);
             OnCollectionChanged(this, NotifyCollectionChangedAction.Add, new KeyValuePair<TKey, TValue>(key, value));
 
-            //OnPropertyChanged(this, "Values");
-            //OnPropertyChanged(this, "Keys");
-            //OnPropertyChanged(this, "Count");
+            OnPropertyChanged(this, "Values");
+            OnPropertyChanged(this, "Keys");
+            OnPropertyChanged(this, "Count");
         }
 
         public new bool Remove(TKey key)
         {
-            var kvp = base[key];
+            TValue value = base[key];
             var result = base.Remove(key);
             if (result)
             {
-                OnCollectionChanged(this, NotifyCollectionChangedAction.Remove, kvp);
+                //Won't work, NotifyCollectionChangedEventArgs needs an index which Dictionary doesn't provide
+                //OnCollectionChanged(this, NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value));
 
-                //OnPropertyChanged(this, "Values");
-                //OnPropertyChanged(this, "Keys");
-                //OnPropertyChanged(this, "Count");
+                OnPropertyChanged(this, "Values");
+                OnPropertyChanged(this, "Keys");
+                OnPropertyChanged(this, "Count");
             }
             return result;
         }
@@ -59,6 +60,9 @@ namespace Hexxagon.Common
         {
             base.Clear();
             OnCollectionChanged(this, NotifyCollectionChangedAction.Reset, null);
+            OnPropertyChanged(this, "Values");
+            OnPropertyChanged(this, "Keys");
+            OnPropertyChanged(this, "Count");
         }
 
         public new TValue this[TKey key]
@@ -69,8 +73,11 @@ namespace Hexxagon.Common
             }
             set
             {
-                base[key] = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
+                Remove(key);
+                Add(key, value);
+                //base[key] = value;
+                //PropertyChanged(this, new PropertyChangedEventArgs("Keys"));
+                //PropertyChanged(this, new PropertyChangedEventArgs("Values"));
             }
         }
     }
