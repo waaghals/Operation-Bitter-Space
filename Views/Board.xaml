@@ -44,21 +44,11 @@
             
         </ItemsControl>
 
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Scores}" />
-        
-        
-       <!-- <ItemsControl ItemsSource="{Binding Scores}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Width="Auto"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Rectangle Width="{Binding Value}" Fill="{Binding Key.Hue, Converter={StaticResource GradientConverter}}" Height="30" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl> -->
-
+        <DataGrid Margin="10, 0, 0, 0" Grid.Column="1" ItemsSource="{Binding Scores}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Speler naam" Binding="{Binding Key.Name}" Width="2*" />
+                <DataGridTextColumn Header="Score" Binding="{Binding Value}" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

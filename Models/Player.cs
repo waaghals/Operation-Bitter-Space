@@ -63,5 +63,10 @@ namespace Hexxagon.Models
         {
             return Name.GetHashCode() + Hue;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace Hexxagon.Models
     {
         public void MapHexagons()
         {
-            //Dictionary<Neighbour, Vector3D> neighbours = new Dictionary<Neighbour, Vector3D>();
             Dictionary<Neighbour, Vector> oddNeighbours = new Dictionary<Neighbour, Vector>();
             Dictionary<Neighbour, Vector> evenNeighbours = new Dictionary<Neighbour, Vector>();
             Dictionary<Neighbour, Vector> neighbours = new Dictionary<Neighbour, Vector>();
@@ -38,23 +37,6 @@ namespace Hexxagon.Models
 
             foreach (Vector location in Keys)
             {
-
-                //neighbours.Clear();
-                //neighbours.Add(Neighbour.North, new Vector(C.X, C.Y - 1));
-                //neighbours.Add(Neighbour.South, new Vector(C.X, C.Y + 1));
-                //neighbours.Add(Neighbour.NorthEast, new Vector(C.X + 1, C.Y - 1));
-                //neighbours.Add(Neighbour.NorthWest, new Vector(C.X - 1, C.Y));
-                //neighbours.Add(Neighbour.SouthEast, new Vector(C.X - 1, C.Y + 1));
-                //neighbours.Add(Neighbour.SouthWest, new Vector(C.X + 1, C.Y));
-
-                //neighbours.Clear();
-                //neighbours.Add(Neighbour.North, new Vector3D(C.X, C.Y + 1, C.Z - 1));
-                //neighbours.Add(Neighbour.South, new Vector3D(C.X, C.Y - 1, C.Z + 1));
-                //neighbours.Add(Neighbour.NorthEast, new Vector3D(C.X + 1, C.Y, C.Z - 1));
-                //neighbours.Add(Neighbour.NorthWest, new Vector3D(C.X - 1, C.Y + 1, C.Z));
-                //neighbours.Add(Neighbour.SouthEast, new Vector3D(C.X + 1, C.Y - 1, C.Z));
-                //neighbours.Add(Neighbour.SouthWest, new Vector3D(C.X - 1, C.Y, C.Z + 1));
-
                 CellViewModel current = this[location];
                 if (location.X%2==0)
                 {
@@ -80,30 +62,9 @@ namespace Hexxagon.Models
 
         public void Add(int x, int y, CellViewModel v)
         {
-            //x = q
-            //z = r - (q - q&1) / 2
-            //y = -x-z
-
-            //int z = x - (y - y % 2) / 2;
-            //y = -x - z;
             Vector p = new Vector(x, y);
             base.Add(p, v);
         }
-
-        //public void Add(int x, int y, int z, CellViewModel v)
-        //{
-        //    Vector3D p = new Vector3D(x, y, z);
-        //    Add(p, v);
-        //}
-
-        //public void Add(Vector3D key, CellViewModel value)
-        //{
-        //    if (key.X + key.Y + key.Z != 0)
-        //    {
-        //        throw new ArgumentException("Sum of X, Y and Z should always be zero");
-        //    }
-        //    base.Add(key, value);
-        //}
 
         public IEnumerable GetPlayers()
         {
@@ -123,6 +84,18 @@ namespace Hexxagon.Models
                 }
             }
         }
+
+        public int CellCount(Player player)
+        {
+            int score = 0;
+            foreach (CellViewModel cell in Values)
+            {
+                if (cell.Hex.OwnedBy(player))
+                    score++;
+            }
+            return score;
+        }
+
     }
 
     public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyPropertyChanged, INotifyCollectionChanged

@@ -62,35 +62,15 @@ namespace Hexxagon.ViewModels
             Player p = turns.Dequeue();
             turns.Enqueue(p);
             UpdateScores();
-
-            PrintScores();
-        }
-
-        private void PrintScores()
-        {
-            foreach (KeyValuePair<Player, int> pair in Scores)
-            {
-                Console.WriteLine(pair.Key.Name + ": " + pair.Value);
-            }
         }
 
         private void UpdateScores()
         {
             Scores.Clear();
-            foreach (CellViewModel cell in Map.Values)
+            foreach (Player p in Players)
             {
-                if (!cell.Hex.IsOwned())
-                    continue;
-
-                AvailableCell ownedCell = cell.Hex as AvailableCell;
-                if (Scores.ContainsKey(ownedCell.Owner))
-                {
-                    Scores[ownedCell.Owner]++;
-                }
-                else
-                {
-                    Scores.Add(ownedCell.Owner, 1);
-                }
+                int count = Map.CellCount(p);
+                Scores.Add(p, count);
             }
         }
     }
