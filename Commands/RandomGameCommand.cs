@@ -16,12 +16,10 @@ namespace Hexxagon.Commands
         public GameViewModel Game { get; set; }
         private MainViewModel mainWindow;
         private GameCreatorViewModel gm;
-        private ObservableCollection<Player> players;
 
-        public RandomGameCommand(MainViewModel mainWindow, ObservableCollection<Player> players, GameCreatorViewModel gm)
+        public RandomGameCommand(MainViewModel mainWindow, GameCreatorViewModel gm)
         {
             this.mainWindow = mainWindow;
-            this.players = players;
             this.gm = gm;
             Game = new GameViewModel();
         }
@@ -34,24 +32,31 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-            return players.Count >= 0;
+            return gm.Players.Count >= 2;
         }
 
         public void Execute(object parameter)
         {
             Game.Map.Clear();
             Random ran = new Random();
+            int width = gm.StoredWidth;
+            int height = gm.StoredHeight;
+
+            if (width < 4)
+                width = 4;
+            if (height < 4)
+                height = 4;
 
             Cell hexCell;
-            for (int i = 0; i < gm.StoredWidth; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < gm.StoredHeight; j++)
+                for (int j = 0; j < height; j++)
                 {
                     int random = ran.Next(gm.Players.Count + 1);
 
                     if (gm.Players.Count > random)
                     {
-                        hexCell = new AvailableCell() { Owner = players[random] };
+                        hexCell = new AvailableCell() { Owner = gm.Players[random] };
                     }
                     else
                     {

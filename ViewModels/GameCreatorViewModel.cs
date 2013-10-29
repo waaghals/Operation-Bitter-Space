@@ -59,7 +59,7 @@ namespace Hexxagon.ViewModels
         public GameCreatorViewModel(MainViewModel ViewModel)
         {
             Players = new ObservableCollection<Player>();
-            GenerateGameCommand = new RandomGameCommand(ViewModel, Players, this);
+            GenerateGameCommand = new RandomGameCommand(ViewModel, this);
         }
     }
 }
