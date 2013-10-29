@@ -62,6 +62,7 @@ namespace Hexxagon.ViewModels
         {
             Player p = turns.Dequeue();
             turns.Enqueue(p);
+
             UpdateScores();
         }
 
@@ -73,6 +74,30 @@ namespace Hexxagon.ViewModels
                 int count = Map.CellCount(p);
                 Scores.Add(p, count);
             }
+
+            while (GameOverCheck(turns.Peek()))
+            {
+                turns.Dequeue();
+                if (turns.Count() == 0)
+                    break;
+            }
+            if (turns.Count() < 2)
+            {
+                Application.Current.Shutdown();
+            }
+
+        }
+
+        private bool GameOverCheck(Player p)
+        {
+            foreach (CellViewModel cell in Map.Values)
+            {
+                if ((cell.Hex.OwnedBy(p) && cell.Hex.CanMove()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

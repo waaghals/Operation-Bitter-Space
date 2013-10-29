@@ -36,5 +36,10 @@ namespace Hexxagon.Models
         {
             return false;
         }
+
+        public override bool CanMove()
+        {
+            return false;
+        }
     }
 }

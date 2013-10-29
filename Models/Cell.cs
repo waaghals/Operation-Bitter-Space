@@ -14,6 +14,7 @@ namespace Hexxagon.Models
         public abstract bool Clonable { get; }
         public abstract bool Jumpable { get; }
         public abstract bool Available();
+        public abstract bool CanMove();
         public abstract bool OwnedBy(Player p);
         public abstract bool IsOwned();
         public abstract void HighlightFrom(Cell from, Distance distance);

@@ -122,5 +122,20 @@ namespace Hexxagon.Models
         {
             dest.Owner = this.Owner;
         }
+
+        public override bool CanMove()
+        {
+            foreach (Cell neighbour in Neighbours.Values)
+            {
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                {
+                    if (!farNeighbour.IsOwned() && farNeighbour.GetType() == typeof(AvailableCell))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
