@@ -173,6 +173,15 @@ namespace Hexxagon.Models
             return result;
         }
 
+        public new void Clear()
+        {
+            base.Clear();
+            OnCollectionChanged(this, NotifyCollectionChangedAction.Reset, null);
+            OnPropertyChanged(this, "Values");
+            OnPropertyChanged(this, "Keys");
+            OnPropertyChanged(this, "Count");
+        }
+
         public new TValue this[TKey key]
         {
             get

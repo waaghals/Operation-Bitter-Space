@@ -16,11 +16,16 @@
         <Helpers:GradientConverter x:Key="GradientConverter" />
         <Common:WidthConverter x:Key="WidthConverter" />
     </UserControl.Resources>
-    <StackPanel>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
         <ItemsControl ItemsSource="{Binding Map}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board"/>
+                    <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board" Grid.Column="0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -38,19 +43,22 @@
             </ItemsControl.ItemContainerStyle>
             
         </ItemsControl>
+
+        <DataGrid Grid.Column="1" ItemsSource="{Binding Scores}" />
         
-        <ItemsControl ItemsSource="{Binding Scores}">
+        
+       <!-- <ItemsControl ItemsSource="{Binding Scores}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Width="Auto"/>
+                    <StackPanel Width="Auto"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Rectangle Width="{Binding Value, Converter={StaticResource BindingDebug}}" Fill="{Binding Key.Hue, Converter={StaticResource GradientConverter}}" Height="30" />
+                    <Rectangle Width="{Binding Value}" Fill="{Binding Key.Hue, Converter={StaticResource GradientConverter}}" Height="30" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl> -->
 
-    </StackPanel>
+    </Grid>
 </UserControl>
