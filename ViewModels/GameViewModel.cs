@@ -59,7 +59,20 @@ namespace Hexxagon.ViewModels
         public void DoTurn()
         {
             Player p = turns.Dequeue();
+            Console.WriteLine(GameOverCheck());
             turns.Enqueue(p);
+        }
+
+        private string GameOverCheck()
+        {
+            foreach (CellViewModel cell in Map.Values)
+            {
+                if ((cell.Hex.OwnedBy(turns.Peek()) && cell.Hex.CanMove()))
+                {
+                    return "spel kan door";
+                }
+            }
+            return "Game Stopt";
         }
     }
 }
