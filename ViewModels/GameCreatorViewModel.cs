@@ -16,12 +16,50 @@ namespace Hexxagon.ViewModels
         private MainViewModel MainWindow;
 
         public ObservableCollection<Player> Players { get; set; }
+        private int storedHeight;
+        public int StoredHeight
+        {
+            get
+            {
+                return storedHeight;
+            }
+            set
+            {
+                SetProperty(ref storedHeight, value);
+            }
+        }
+
+        private int storedWidth;
+        public int StoredWidth
+        {
+            get
+            {
+                return storedWidth;
+            }
+            set
+            {
+                SetProperty(ref storedWidth, value);
+            }
+        }
+
+        private int holes;
+        public int Holes
+        {
+            get
+            {
+                return holes;
+            }
+            set
+            {
+                SetProperty(ref holes, value);
+            }
+        }
         public ICommand GenerateGameCommand { get; set; }
 
         public GameCreatorViewModel(MainViewModel ViewModel)
         {
             Players = new ObservableCollection<Player>();
-            GenerateGameCommand = new RandomGameCommand(ViewModel, Players);
+            GenerateGameCommand = new RandomGameCommand(ViewModel, Players, this);
         }
     }
 }

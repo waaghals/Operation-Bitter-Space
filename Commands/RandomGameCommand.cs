@@ -15,12 +15,14 @@ namespace Hexxagon.Commands
     {
         public GameViewModel Game { get; set; }
         private MainViewModel mainWindow;
+        private GameCreatorViewModel gm;
         private ObservableCollection<Player> players;
 
-        public RandomGameCommand(MainViewModel mainWindow, ObservableCollection<Player> players)
+        public RandomGameCommand(MainViewModel mainWindow, ObservableCollection<Player> players, GameCreatorViewModel gm)
         {
             this.mainWindow = mainWindow;
             this.players = players;
+            this.gm = gm;
             Game = new GameViewModel();
         }
 
@@ -32,7 +34,7 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-            return players.Count >= 2;
+            return players.Count >= 0;
         }
 
         public void Execute(object parameter)
@@ -41,47 +43,23 @@ namespace Hexxagon.Commands
             Random ran = new Random();
 
             Cell hexCell;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < gm.StoredWidth; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < gm.StoredHeight; j++)
                 {
-                    switch (ran.Next(4))
-                    {
-                        case 1:
-                            hexCell = new AvailableCell()
-                            {
-                                Owner = new Player()
-                                {
-                                    Name = "Yorick",
-                                    Hue = 110
-                                }
-                            };
-                            break;
-                        case 2:
-                            hexCell = new AvailableCell()
-                            {
-                                Owner = new Player()
-                                {
-                                    Name = "Patrick",
-                                    Hue = 349
-                                }
-                            };
-                            break;
+                    int random = ran.Next(gm.Players.Count + 1);
 
-                        default:
-                            hexCell = new AvailableCell();
-                            break;
+                    if (gm.Players.Count > random)
+                    {
+                        hexCell = new AvailableCell() { Owner = players[random] };
+                    }
+                    else
+                    {
+                        hexCell = new AvailableCell();
                     }
 
-                    if (i == 3 && j == 5)
-                        hexCell = new UnavailableCell();
-
-                    if (i == 7 && j == 2)
-                        hexCell = new UnavailableCell();
-                    // hexCell.Name += "X:" + i + " Y:" + j;
-                        
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
-                    
+
                 }
             }
 
