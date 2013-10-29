@@ -27,7 +27,7 @@ namespace Hexxagon.ViewModels
         {
             get
             {
-                if (turns == null)
+                if (turns == null && turns.Count > 0)
                 {
                     return null;
                 }
@@ -60,10 +60,39 @@ namespace Hexxagon.ViewModels
 
         public void DoTurn()
         {
-            Player p = turns.Dequeue();
-            turns.Enqueue(p);
+            Player player = turns.Dequeue();
+            turns.Enqueue(player);
 
+            RemoveUnmovablePlayers();
             UpdateScores();
+
+            if (IsEndOfGame())
+            {
+                ResetGame();
+            }
+        }
+
+        private void RemoveUnmovablePlayers()
+        {
+            while (IsGameOver(CurrentPlayer))
+            {
+                turns.Dequeue();
+                if (turns.Count() == 0)
+                    break;
+            }
+        }
+
+        private void ResetGame()
+        {
+            Scores.Clear();
+            Map.Clear();
+            Players.Clear();
+            turns.Clear();
+        }
+
+        private bool IsEndOfGame()
+        {
+            return turns.Count() < 2;
         }
 
         private void UpdateScores()
@@ -74,21 +103,9 @@ namespace Hexxagon.ViewModels
                 int count = Map.CellCount(p);
                 Scores.Add(p, count);
             }
-
-            while (GameOverCheck(turns.Peek()))
-            {
-                turns.Dequeue();
-                if (turns.Count() == 0)
-                    break;
-            }
-            if (turns.Count() < 2)
-            {
-                Application.Current.Shutdown();
-            }
-
         }
 
-        private bool GameOverCheck(Player p)
+        private bool IsGameOver(Player p)
         {
             foreach (CellViewModel cell in Map.Values)
             {
