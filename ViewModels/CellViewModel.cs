@@ -53,7 +53,7 @@ namespace Hexxagon.ViewModels
             ClickCommand = new SelectCommand(h, currentGame);
             Gradient = UpdateGradient();
 
-            if (Hex.Owned())
+            if (Hex.IsOwned())
             {
                 SubscribeTo((Hex as AvailableCell).Owner);
             }
@@ -62,7 +62,7 @@ namespace Hexxagon.ViewModels
 
         private Brush UpdateGradient()
         {
-            if (Hex.Owned())
+            if (Hex.IsOwned())
             {
                 return GradientHelper.FromHue((Hex as AvailableCell).Hue, 1);
             }
