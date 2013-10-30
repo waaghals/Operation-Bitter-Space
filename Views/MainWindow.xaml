@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:Hexxagon"
     xmlns:controls="clr-namespace:Hexxagon.Controls"
         WindowStartupLocation="CenterScreen"
-    Title="GridTest" SizeToContent="WidthAndHeight">
+    Title="GridTest" WindowState="Maximized">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Bestand">

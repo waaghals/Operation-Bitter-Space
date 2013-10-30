@@ -41,35 +41,52 @@ namespace Hexxagon.Commands
             Random ran = new Random();
             int width = gm.StoredWidth;
             int height = gm.StoredHeight;
+            int density = gm.Density;
 
-            if (width < 4)
-                width = 4;
-            if (height < 4)
-                height = 4;
+            if (width < 6)
+                width = 6;
+            if (height < 6)
+                height = 6;
+            if (density < 30)
+                density = 30;
+
+            int maxStart = Convert.ToInt32((height * width * ((double)density/100)) / gm.Players.Count);
+            Console.WriteLine(height);
+            Console.WriteLine(width);
+            Console.WriteLine(gm.Players.Count);
+            Console.WriteLine(density);
+            Console.WriteLine(maxStart);
+            if (maxStart < 2)
+                maxStart = 2;
+
+
+            Dictionary<Vector, AvailableCell> cells = new Dictionary<Vector, AvailableCell>();
+
+            foreach (Player player in gm.Players)
+                for (int i = 0; i < maxStart; i++)
+                {
+                    Vector vector = new Vector(ran.Next(width), ran.Next(height));
+                    while (cells.ContainsKey(vector))
+                    {
+                        vector = new Vector(ran.Next(width), ran.Next(height));
+                    }
+                    cells.Add(vector, new AvailableCell() { Owner = player });
+                }
 
             Cell hexCell;
             for (int i = 0; i < width; i++)
-            {
                 for (int j = 0; j < height; j++)
                 {
-                    int random = ran.Next(gm.Players.Count + 1);
-
-                    if (gm.Players.Count > random)
-                    {
-                        hexCell = new AvailableCell() { Owner = gm.Players[random] };
-                    }
+                    if (cells.ContainsKey(new Vector(i, j)))
+                        hexCell = cells[new Vector(i, j)];
                     else
-                    {
                         hexCell = new AvailableCell();
-                    }
-
                     Game.Map.Add(i, j, new CellViewModel(hexCell, Game));
-
                 }
-            }
 
             Game.Map.MapHexagons();
             Game.AddPlayersFromMap();
+
 
             mainWindow.MainContent = Game;
             Console.WriteLine("Random Game Created");

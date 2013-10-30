@@ -54,6 +54,19 @@ namespace Hexxagon.ViewModels
                 SetProperty(ref holes, value);
             }
         }
+
+        private int density;
+        public int Density
+        {
+            get
+            {
+                return density;
+            }
+            set
+            {
+                SetProperty(ref density, value);
+            }
+        }
         public ICommand GenerateGameCommand { get; set; }
 
         public GameCreatorViewModel(MainViewModel ViewModel)

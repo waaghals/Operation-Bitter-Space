@@ -39,20 +39,20 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Content="Aantal Gaten" />
+            <Label Grid.Column="0" Grid.Row="0" Content="Aantal Gaten (% van map)" />
             <Slider Grid.Column="1" Grid.Row="0" Minimum="0" Maximum="10" x:Name="holesSlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Holes, Mode=TwoWay}"/>
             <Label Grid.Column="2" Grid.Row="0" Content="{Binding ElementName=holesSlider, Path=Value}" />
 
             <Label Grid.Column="0" Grid.Row="1" Content="Breedte" />
-            <Slider Grid.Column="1" Grid.Row="1" Minimum="4" Maximum="20" x:Name="widhtSlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding StoredWidth, Mode=TwoWay}"/>
+            <Slider Grid.Column="1" Grid.Row="1" Minimum="6" Maximum="31" x:Name="widhtSlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding StoredWidth, Mode=TwoWay}"/>
             <Label Grid.Column="2" Grid.Row="1" Content="{Binding ElementName=widhtSlider, Path=Value}" />
 
             <Label Grid.Column="0" Grid.Row="2" Content="Hoogte" />
-            <Slider Grid.Column="1" Grid.Row="2" Minimum="4" Maximum="20" x:Name="heightSlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding StoredHeight, Mode=TwoWay}"/>
+            <Slider Grid.Column="1" Grid.Row="2" Minimum="6" Maximum="13" x:Name="heightSlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding StoredHeight, Mode=TwoWay}"/>
             <Label Grid.Column="2" Grid.Row="2" Content="{Binding ElementName=heightSlider, Path=Value}" />
 
-            <Label Grid.Column="0" Grid.Row="3" Content="Dichtheid" />
-            <Slider Grid.Column="1" Grid.Row="3" Minimum="0" Maximum="10" x:Name="densitySlider" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Wtfisdit, Mode=TwoWay}" />
+            <Label Grid.Column="0" Grid.Row="3" Content="Dichtheid (% van map door spelers bezet)" />
+            <Slider Grid.Column="1" Grid.Row="3" Minimum="30" Maximum="80" x:Name="densitySlider" IsSnapToTickEnabled="True" TickFrequency="10" Value="{Binding Density, Mode=TwoWay}" />
             <Label Grid.Column="2" Grid.Row="3" Content="{Binding ElementName=densitySlider, Path=Value}" />
 
             <Button Grid.Column="2" Grid.Row="4" Content="Spel starten" Command="{Binding GenerateGameCommand}" />
