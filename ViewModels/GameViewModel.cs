@@ -2,6 +2,7 @@
 using Hexxagon.Common.Helpers;
 using Hexxagon.Controls;
 using Hexxagon.Models;
+using Hexxagon.Commands;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Hexxagon.ViewModels
         {
             get
             {
-                if (turns == null && turns.Count > 0)
+                if (turns == null || turns.Count == 0)
                 {
                     return null;
                 }
@@ -68,6 +69,18 @@ namespace Hexxagon.ViewModels
 
             if (IsEndOfGame())
             {
+                WinCommand win = new WinCommand();
+                String name = "";
+                int score = 0;
+                foreach (var item in Scores)
+                {
+                    if (item.Value > score)
+                    {
+                        score = item.Value;
+                        name = item.Key.Name;
+                    }
+                }
+                win.Execute(name + " Wins with " + score + " Points!!!!");
                 ResetGame();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using Hexxagon.Models;
 using Hexxagon.ViewModels;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 namespace Hexxagon.Commands
@@ -17,7 +18,6 @@ namespace Hexxagon.Commands
 
         public bool CanExecute(object parameter)
         {
-           // return ViewModel.CurrentPlayer != null;
             return true;
         }
 
@@ -25,8 +25,32 @@ namespace Hexxagon.Commands
         {
             if (ViewModel.CurrentPlayer != null)
             {
+                try
+                {
+                    using (StreamWriter file = new StreamWriter("SaveFile.txt", true))
+                    {
+                        File.WriteAllText("SaveFile.txt", String.Empty);
 
-                Console.WriteLine("Saving");
+                        file.WriteLine("HexGrid");
+                        foreach (Player player in ViewModel.Players)
+                        {
+                            file.WriteLine(player.Name + " " + player.Hue);
+                        }
+
+                        foreach (var cell in ViewModel.Map.Values)
+                        {
+                            if (cell.Hex.GetType() == typeof(AvailableCell))
+                            {
+                                //((AvailableCell)cell.Hex).Owner
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The file could not be found:");
+                    Console.WriteLine(e.Message);
+                }
 
             }
         }
