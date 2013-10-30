@@ -44,6 +44,12 @@ namespace Hexxagon.Models
         }
         #endregion
 
+        public Player()
+        {
+            Name = "";
+            Hue = 0;
+        }
+
         public override bool Equals(Object obj)
         {
             if (obj == null)

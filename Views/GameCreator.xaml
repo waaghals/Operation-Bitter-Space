@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:Controls="clr-namespace:Hexxagon.Controls" 
-      xmlns:Helpers="clr-namespace:Hexxagon.Helpers" 
+      xmlns:Helpers="clr-namespace:Hexxagon.Common.Helpers" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              MinWidth="350" MinHeight="500" Height="Auto" Width="Auto">
     <StackPanel>

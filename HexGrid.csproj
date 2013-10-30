@@ -135,7 +135,6 @@
     <Compile Include="Common\BindingDebugger.cs" />
     <Compile Include="Common\WidthConverter.cs" />
     <Compile Include="Common\Helpers\Gradient.cs" />
-    <Compile Include="Common\Helpers\GradientConverter.cs" />
     <Compile Include="Common\Helpers\Shuffler.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\VectorConverter.cs" />

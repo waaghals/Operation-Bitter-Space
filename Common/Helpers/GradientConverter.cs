@@ -8,7 +8,7 @@ namespace Hexxagon.Common.Helpers
     {
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-            return GradientHelper.FromHue((short) value, 1);
+            return GradientHelper.FromHue((short)value, 1);
         }
 
         public Object ConvertBack(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
