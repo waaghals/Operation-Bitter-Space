@@ -111,7 +111,7 @@ namespace Hexxagon.Models
             foreach (CellViewModel item in Values)
             {
                 Player player = null;
-                if (item.Hex.IsOwned())
+                if (item.Hex.Owned())
                 {
                     player = (item.Hex as AvailableCell).Owner;
                 }

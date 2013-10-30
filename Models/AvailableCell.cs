@@ -59,7 +59,7 @@ namespace Hexxagon.Models
         {
             get
             {
-                if (IsOwned())
+                if (Owned())
                     return Owner.Hue;
 
 
@@ -72,12 +72,12 @@ namespace Hexxagon.Models
 
         public override bool Clonable
         {
-            get { return sourceDistance == Distance.Close && !IsOwned(); }
+            get { return sourceDistance == Distance.Close && !Owned(); }
         }
 
         public override bool Jumpable
         {
-            get { return sourceDistance == Distance.Far && !IsOwned(); }
+            get { return sourceDistance == Distance.Far && !Owned(); }
         }
 
         public override bool Available()
@@ -93,7 +93,7 @@ namespace Hexxagon.Models
             return Owner.Equals(p);
         }
 
-        public override bool IsOwned()
+        public override bool Owned()
         {
             return Owner != null;
         }
@@ -102,7 +102,7 @@ namespace Hexxagon.Models
         {
             foreach (Cell neighbour in Neighbours.Values)
             {
-                if (neighbour.IsOwned())
+                if (neighbour.Owned())
                 {
                     ((AvailableCell)neighbour).Owner = this.Owner;
                     
@@ -120,21 +120,6 @@ namespace Hexxagon.Models
         internal void CloneTo(AvailableCell dest)
         {
             dest.Owner = this.Owner;
-        }
-
-        public override bool CanMove()
-        {
-            foreach (Cell neighbour in Neighbours.Values)
-            {
-                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
-                {
-                    if (!farNeighbour.IsOwned() && farNeighbour.GetType() == typeof(AvailableCell))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 }

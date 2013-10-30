@@ -9,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
@@ -27,7 +26,7 @@ namespace Hexxagon.ViewModels
         {
             get
             {
-                if (turns == null || turns.Count == 0)
+                if (turns == null)
                 {
                     return null;
                 }
@@ -61,65 +60,11 @@ namespace Hexxagon.ViewModels
         {
             Player p = turns.Dequeue();
             turns.Enqueue(p);
-
-            RemoveUnmovablePlayers();
-
-            if (IsEndOfGame())
-            {
-                Console.WriteLine("Game Over");
-                Console.WriteLine("");
-                if (turns.Count == 1)
-                    Console.WriteLine(turns.Peek().Name + " is Victorious");
-                else
-                    Console.WriteLine("Mutual Assured Destruction has been achieved...");
-                Application.Current.Windows[0].Close();
-
-                Console.Read();
-            }
-        }
-
-        private bool IsEndOfGame()
-        {
-            if (turns.Count <= 1)
-            {
-                return true;
-            }
-            return false;
         }
 
         public void CalculateScore()
         {
 
-        }
-
-        private bool IsGameOver(Player p)
-        {
-            foreach (CellViewModel cell in Map.Values)
-            {
-                if ((cell.Hex.OwnedBy(p) && cell.Hex.CanMove()))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private void RemoveUnmovablePlayers()
-        {
-            while (IsGameOver(CurrentPlayer))
-            {
-                turns.Dequeue();
-                if (turns.Count() == 0)
-                    break;
-            }
-        }
-
-        private void ResetGame()
-        {
-            //Scores.Clear();
-            Map.Clear();
-            Players.Clear();
-            turns.Clear();
         }
     }
 }

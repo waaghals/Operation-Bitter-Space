@@ -32,12 +32,7 @@ namespace Hexxagon.Models
             return;
         }
 
-        public override bool IsOwned()
-        {
-            return false;
-        }
-
-        public override bool CanMove()
+        public override bool Owned()
         {
             return false;
         }
