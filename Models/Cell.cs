@@ -15,7 +15,8 @@ namespace Hexxagon.Models
         public abstract bool Jumpable { get; }
         public abstract bool Available();
         public abstract bool OwnedBy(Player p);
-        public abstract bool Owned();
+        public abstract bool IsOwned();
+        public abstract bool CanMove();
         public abstract void HighlightFrom(Cell from, Distance distance);
 
         public Cell()

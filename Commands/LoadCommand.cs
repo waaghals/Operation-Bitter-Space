@@ -31,7 +31,7 @@ namespace Hexxagon.Commands
                 {
                     if (sr.ReadLine() != "HexGrid")
                         return;
-
+                    
                     String[] newPlayer1 = sr.ReadLine().Split(' ');
                     String[] newPlayer2 = sr.ReadLine().Split(' ');
 
