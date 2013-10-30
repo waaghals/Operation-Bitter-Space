@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
@@ -19,14 +20,14 @@ namespace Hexxagon.ViewModels
     {
         private Queue<Player> turns;
         public ObservableCollection<Player> Players { get; set; }
-        public ObservableCollection<Score> Scores { get; private set; }
+        public ObservableDictionary<Player, int> Scores { get; private set; }
         public Map Map { get; set; }
 
         public Player CurrentPlayer
         {
             get
             {
-                if (turns == null)
+                if (turns == null && turns.Count > 0)
                 {
                     return null;
                 }
@@ -35,11 +36,12 @@ namespace Hexxagon.ViewModels
         }
 
         public AvailableCell SelectedCell { get; set; }
-        
+
         public GameViewModel()
         {
             Map = new Map();
             Players = new ObservableCollection<Player>();
+            Scores = new ObservableDictionary<Player, int>();
             SubscribeTo(Map);
         }
 
@@ -48,7 +50,7 @@ namespace Hexxagon.ViewModels
             foreach (Player p in Map.GetPlayers())
             {
                 if (!Players.Contains(p))
-                Players.Add(p);
+                    Players.Add(p);
             }
             IList<Player> playerList = Players.ToList();
             playerList.Shuffle();
@@ -58,8 +60,61 @@ namespace Hexxagon.ViewModels
 
         public void DoTurn()
         {
-            Player p = turns.Dequeue();
-            turns.Enqueue(p);
+            Player player = turns.Dequeue();
+            turns.Enqueue(player);
+
+            RemoveUnmovablePlayers();
+            UpdateScores();
+
+            if (IsEndOfGame())
+            {
+                ResetGame();
+            }
+        }
+
+        private void RemoveUnmovablePlayers()
+        {
+            while (IsGameOver(CurrentPlayer))
+            {
+                turns.Dequeue();
+                if (turns.Count() == 0)
+                    break;
+            }
+        }
+
+        private void ResetGame()
+        {
+            Scores.Clear();
+            Map.Clear();
+            Players.Clear();
+            turns.Clear();
+        }
+
+        private bool IsEndOfGame()
+        {
+            return turns.Count() < 2;
+        }
+
+        private void UpdateScores()
+        {
+            Scores.Clear();
+            foreach (Player p in Players)
+            {
+                int count = Map.CellCount(p);
+                Scores.Add(p, count);
+            }
+        }
+
+        private bool IsGameOver(Player p)
+        {
+            foreach (CellViewModel cell in Map.Values)
+            {
+                if ((cell.Hex.OwnedBy(p) && cell.Hex.CanMove()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void CalculateScore()

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Controls="clr-namespace:Hexxagon.Controls"
              xmlns:Common="clr-namespace:Hexxagon.Common"
+             xmlns:Helpers="clr-namespace:Hexxagon.Common.Helpers"
              xmlns:Debug="clr-namespace:DebugDataBindings"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -12,12 +13,19 @@
         <Common:VectorToXConverter x:Key="ConverterX" />
         <Common:VectorToYConverter x:Key="ConverterY" />
         <Debug:DebugConverter x:Key="BindingDebug" />
+        <Helpers:GradientConverter x:Key="GradientConverter" />
+        <Common:WidthConverter x:Key="WidthConverter" />
     </UserControl.Resources>
-    <StackPanel>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
         <ItemsControl ItemsSource="{Binding Map}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board"/>
+                    <Controls:HexagonGrid Rows="10" Columns="10" HexagonSideLength="40" x:Name="Board" Grid.Column="0"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -35,19 +43,12 @@
             </ItemsControl.ItemContainerStyle>
             
         </ItemsControl>
-        
-        <ItemsControl ItemsSource="{Binding Scores}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Rectangle Width="{Binding Path=Points}" Fill="{Binding Path=Player.Hue}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
 
-    </StackPanel>
+        <DataGrid Margin="10, 0, 0, 0" Grid.Column="1" ItemsSource="{Binding Scores}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Speler naam" Binding="{Binding Key.Name}" Width="2*" />
+                <DataGridTextColumn Header="Score" Binding="{Binding Value}" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </UserControl>

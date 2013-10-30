@@ -60,5 +60,15 @@ namespace Hexxagon.Models
             // Return true if the fields match:
             return (Name == p.Name) && (Hue == p.Hue);
         }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode() + Hue;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

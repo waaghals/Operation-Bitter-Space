@@ -105,6 +105,7 @@ namespace Hexxagon.Models
                 if (neighbour.IsOwned())
                 {
                     ((AvailableCell)neighbour).Owner = this.Owner;
+                    ((AvailableCell)neighbour).OnPropertyChanged("Hue");
                     
                 }
             }
@@ -120,6 +121,21 @@ namespace Hexxagon.Models
         internal void CloneTo(AvailableCell dest)
         {
             dest.Owner = this.Owner;
+        }
+
+        public override bool CanMove()
+        {
+            foreach (Cell neighbour in Neighbours.Values)
+            {
+                foreach (Cell farNeighbour in neighbour.Neighbours.Values)
+                {
+                    if (!farNeighbour.IsOwned() && farNeighbour.GetType() == typeof(AvailableCell))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

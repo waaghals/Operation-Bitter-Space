@@ -27,6 +27,7 @@ namespace Hexxagon.Commands
         {
             try
             {
+                ViewModel.Map.Clear();
                 using (StreamReader sr = new StreamReader("SaveFile.txt"))
                 {
                     if (sr.ReadLine() != "HexGrid")

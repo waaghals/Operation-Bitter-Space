@@ -10,7 +10,6 @@ namespace DebugDataBindings
 
         public Object Convert(Object value, Type targetType, Object parameter, System.Globalization.CultureInfo culture)
         {
-
             //set a breakVector here
             return value;
         }
